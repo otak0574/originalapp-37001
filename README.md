@@ -25,12 +25,12 @@
 |-----------------|--------|-------------|
 | name            | string | null: false |
 | business_hours  | string | null: false |
-| category        | string | null: false |
+| category_id     | string | null: false |
 | address         | string | null: false |
-| loyalty_card_id | string |             |
 | details         | text   |             |
 | delivery_time   | string | null: false |
 
+<!-- | loyalty_card_id | string |             | -->
 ### Associations
 - has_many :carts
 - has_many :store_items
