@@ -1,0 +1,2 @@
+class PublicstoresController < ApplicationController
+end
