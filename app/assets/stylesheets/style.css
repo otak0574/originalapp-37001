@@ -38,7 +38,8 @@ h2 {
 .field input[type="email"],
 .field input[type="password"],
 .field input[type="tel"],
-.field input[type="text"]{
+.field input[type="text"],
+.field textarea{
   width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;

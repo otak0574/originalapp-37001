@@ -37,9 +37,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_16_053658) do
     t.string "name", null: false
     t.string "business_hours", null: false
     t.string "category_id", null: false
+    t.string "post_number", null: false
     t.string "address", null: false
     t.text "details"
     t.string "delivery_time", null: false
+    t.string "phone_number", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
