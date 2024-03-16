@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :stores
+  devise_for :stores, controllers: {
+    registrations: "stores/registrations",
+    sessions: "stores/sessions",
+    passwords: "stores/passwords",
+    confirmations: "stores/confirmations"
+  }
   devise_for :customers, controllers: {
     registrations: "customers/registrations",
     sessions: "customers/sessions",
