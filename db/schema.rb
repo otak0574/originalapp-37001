@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_15_230410) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_16_053658) do
   create_table "customers", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -29,6 +29,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_230410) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "stores", charset: "utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "name", null: false
+    t.string "business_hours", null: false
+    t.string "category_id", null: false
+    t.string "post_number", null: false
+    t.string "address", null: false
+    t.text "details"
+    t.string "delivery_time", null: false
+    t.string "phone_number", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_stores_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_stores_on_reset_password_token", unique: true
   end
 
 end
