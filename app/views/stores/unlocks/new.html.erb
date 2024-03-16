@@ -1,6 +1,6 @@
 <h2>Resend unlock instructions</h2>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_with model: @store, url: unlocks_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
   <%= render "stores/shared/error_messages", resource: resource %>
 
   <div class="field">
