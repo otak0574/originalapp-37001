@@ -4,10 +4,10 @@
 |-----------------|--------|--------------------------------|
 | nickname        | string | null: false                    |
 | email           | string | null: false, unique: true      |
-| pass            | string | null: false                    |
-| phone_number    | string | null: false                    |
+| encrypted_password| string | null: false                    |
+| phone_number    | integer| null: false                    |
 | birth_date      | date   | null: false                    |
-| gender          | string | null: false                    |
+| gender_id       | integer| null: false                    |
 | first_name      | string | null: false                    |
 | last_name       | string | null: false                    |
 | first_name_kana | string | null: false                    |
