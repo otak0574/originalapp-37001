@@ -5,30 +5,68 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      Bootstrap
-    </a>
-  </div>
-</nav>
-        
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-    <%= yield %>
+    <header class="<%= customer_signed_in? ? 'header-logged-in' : 'header-logged-out' %>">
+      <div class="header-container">
+        <button class="btn custom-sidebar-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+          <i class="fa-solid fa-bars fa-lg"></i>
+        </button>
+        <!-- オフキャンバスメニュー -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+          <div class="offcanvas-header">
+            <h5 id="sidebarLabel">Sidebar</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <!-- サイドバーの内容 -->
+            <ul>
+              <% if customer_signed_in? %>
+                <%= link_to 'ログアウト', destroy_customer_session_path, class: 'btn btn-primary' %>
+              <% end %>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Messages</a></li>
+              <!-- その他のリンク -->
+            </ul>
+          </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex w-100 p-3 justify-content-between" ">
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">
+              <i class="fa-solid fa-carrot"></i>
+              サービス名
+              </a>
+            </div>
+          </nav>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2 custom-search-input" type="search" placeholder="Search" aria-label="Search" >
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <%if customer_signed_in? %>
+          <div>
+            <a href="#" class="location-link">
+              <i class="fa-solid fa-location-dot"></i> 94105
+            </a>
+            <div class="shopping-cart">
+              <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+              <span class="cart-count">2</span>
+          </div>
+          <% else %>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
+            <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-primary' %>
+          </div>
+          </div>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+  <%= yield %>
   </body>
 </html>
