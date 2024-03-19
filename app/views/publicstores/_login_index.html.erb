@@ -1,11 +1,48 @@
-<div class="scrolling-wrapper">
-  <button class="scroll-btn left-scroll-btn">&lt;</button>
-
+<div class="scrolling-wrapper border-bottom">
   <div class="cards-container">
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <!-- その他のカード -->
+    <%= link_to "#", class: "category" do %>
+      <div class="card border border-0 bg-transparent">
+        <div class="category-logo">
+          <i class="fa-solid fa-bowl-food fa-2x"></i>
+          食料品
+        </div>
+      </div>
+    <% end %>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-jar fa-2x"></i>調味料</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-champagne-glasses fa-2x"></i>お酒</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-cubes fa-2x"></i>備蓄食品</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-ruler fa-2x"></i>日用品</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-gift fa-2x"></i>ギフト</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-cookie-bite fa-2x"></i>お菓子</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-cake-candles fa-2x"></i>デザート</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-baby fa-2x"></i>お子様用</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-spray-can-sparkles fa-2x"></i>化粧品</div></div>
+    <div class="card border border-0 bg-transparent"><div class="category-logo"><i class="fa-solid fa-paw fa-2x"></i>ペット</div></div>
   </div>
-
-  <button class="scroll-btn right-scroll-btn">&gt;</button>
 </div>
+<div class="main-container">
+  <% @store.each do |store|%>
+    <%= link_to publicstore_path(store.id), class: "none-text-decoration" do %>
+      <div class="card mb-3 " style="width: 400px;">
+        <div class="row g-0">
+          <div class="col-md-4 store-logo-parent">
+            <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= store.name %></h5>
+              <p class="card-text"><%= store.business_hours%></p>
+              <p class="card-text"><small class="text-body-secondary"><%= store.category_id %></small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="top-category">
+<div class="category-store"><p>セール品</p></div>
+<div class="category-store"><p>食料品</p></div>
+
+</div>
+
