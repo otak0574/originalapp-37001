@@ -1,0 +1,74 @@
+<div class="contents row">
+  <div class="container">
+    <h2>ストア管理者新規登録</h2>
+
+    <%= form_with model: @store, url: registration_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
+
+      <%= render "customers/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :name, "店舗名" %><br />
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, "店舗メールアドレス" %><br />
+        <%= f.email_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "パスワード" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上入力してください)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワード確認"%><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone_number, "店舗電話番号" %><br />
+        <%= f.telephone_field :phone_number %>
+      </div>
+
+      <div class="field">
+        <%= f.label :business_hours, "営業時間" %><br />
+        <%= f.text_field :business_hours %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category_id, "取り扱い商品の分類(複数選択可)" %><br />
+        <%= f.text_field :category_id %>
+      </div>
+
+      <div class="field">
+        <%= f.label :post_number, "郵便番号" %><br />
+        <%= f.text_field :post_number %>
+      </div>
+
+      <div class="field">
+        <%= f.label :address, "住所" %><br />
+        <%= f.text_field :address %>
+      </div>
+
+      <div class="field">
+        <%= f.label :details, "店舗説明"%><br />
+        <%= f.text_area :details %>
+      </div>
+
+      <div class="field">
+        <%= f.label :delivery_time, "配達時間"%><br />
+        <%= f.text_field :delivery_time %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
+    <% end %>
+
+    <%= render "stores/shared/links" %>
+  </div>
+</div>
