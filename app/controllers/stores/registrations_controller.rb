@@ -9,6 +9,43 @@ class Stores::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def new
+    @store = Store.new
+  end
+
+  def create
+    @store = Store.new(sign_up_params)
+     unless @store.valid?
+       render :new, status: :unprocessable_entity and return
+     end
+    session["devise.regist_data"] = {store: @store.attributes}
+    session["devise.regist_data"][:store]["password"] = params[:store][:password]
+    @address = @store.build_store_address
+    render :new_store_address, status: :accepted
+  end
+
+  def create_store_address
+    @store = Store.new(session["devise.regist_data"]["store"])
+    @address = StoreAddress.new(address_params)
+     unless @address.valid?
+       render :new_store_address, status: :unprocessable_entity and return
+     end
+    @store.build_store_address(@address.attributes)
+    @store.save
+    session["devise.regist_data"]["store"].clear
+    sign_in(:store, @store)
+    redirect_to publicstore_path(@store)
+  end
+
+  def create_store_infomation
+  end
+ 
+  private
+ 
+  def address_params
+    params.require(:store_address).permit(:postal_code, :pref_id, :address, :phone_number)
+  end
+
   # POST /resource
   # def create
   #   super

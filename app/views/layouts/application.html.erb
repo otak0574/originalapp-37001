@@ -25,7 +25,13 @@
             <!-- サイドバーの内容 -->
             <ul>
               <% if customer_signed_in? %>
-                <%= link_to 'ログアウト', destroy_customer_session_path, class: 'btn btn-primary' %>
+                <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete }%></li>
+              <% end %>
+              <% if store_signed_in? %>
+                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-primary'%></li>
+              <% else %>
+                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-primary'%>
+                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-primary'%>
               <% end %>
               <li><a href="#">Home</a></li>
               <li><a href="#">Profile</a></li>
@@ -48,22 +54,22 @@
             <input class="form-control me-2 custom-search-input" type="search" placeholder="Search" aria-label="Search" >
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-          <%if customer_signed_in? %>
-          <div>
-            <a href="#" class="location-link">
-              <i class="fa-solid fa-location-dot"></i> 94105
-            </a>
-            <div class="shopping-cart">
-              <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-              <span class="cart-count">2</span>
-          </div>
-          <% else %>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
-            <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-primary' %>
-          </div>
-          </div>
-          <% end %>
+            <%if customer_signed_in? %>
+              <div>
+                <a href="#" class="location-link">
+                  <i class="fa-solid fa-location-dot"></i> 94105
+                </a>
+                <div class="shopping-cart">
+                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                  <span class="cart-count">2</span>
+                </div>
+              </div>
+            <% else %>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
+                <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-primary' %>
+              </div>
+            <% end %>
         </nav>
       </div>
     </header>
