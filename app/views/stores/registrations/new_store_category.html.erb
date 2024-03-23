@@ -1,0 +1,22 @@
+<h2>店舗カテゴリー</h2>
+
+<%= form_for @category do |f| %>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <%= render "devise/shared/error_messages", resource: @category %>
+      <div class="field">
+        <%= f.label :category_ids, "取り扱い商品の分類(複数選択可)" %><br />
+        <% Category.all.each do |category| %>
+          <div class="form-check">
+            <%= check_box_tag "store[category_ids][]", category.id, @store.category_ids.include?(category.id), id: dom_id(category) %>
+            <%= label_tag dom_id(category), category.name %><br>
+          </div>
+          <% end %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign Up" %>
+      </div>
+      <button type="button" onclick="history.back();">戻る</button>
+    </div>
+  </div>
+<% end %>
