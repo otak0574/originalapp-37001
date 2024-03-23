@@ -13,6 +13,24 @@ class Stores::RegistrationsController < Devise::RegistrationsController
     @store = Store.new
   end
 
+  def new_store_address
+    session_store_data = session["devise.regist_data"]["store"]
+    @store = Store.new(session_store_data)
+    @address = @store.build_store_address(session["devise.regist_data"]["store_address"]["store"])
+    # 必要であれば、ここで他の処理を追加
+  end
+
+  def new_store_information
+    session_store_data = session["devise.regist_data"]["store"]
+    @store = Store.new(session_store_data)
+    session_address_data = session["devise.regist_data"]["store_address"]["store"]
+    @address = @store.build_store_address(session_address_data)
+    @info = @store.build_store_information
+  
+    # 必要であれば、ここで他の処理を追加
+  end
+  
+
   def create
     @store = Store.new(sign_up_params)
      unless @store.valid?
@@ -30,14 +48,44 @@ class Stores::RegistrationsController < Devise::RegistrationsController
      unless @address.valid?
        render :new_store_address, status: :unprocessable_entity and return
      end
-    @store.build_store_address(@address.attributes)
-    @store.save
-    session["devise.regist_data"]["store"].clear
-    sign_in(:store, @store)
-    redirect_to publicstore_path(@store)
+    session["devise.regist_data"]["store_address"]= {store: @address.attributes}
+    @info = @store.build_store_information
+    render :new_store_information, status: :accepted
   end
 
-  def create_store_infomation
+  def create_store_information
+    @store = Store.new(session["devise.regist_data"]["store"])
+    @address_attributes = session["devise.regist_data"]["store_address"]["store"]
+    @address = StoreAddress.new(@address_attributes)
+    @info = StoreInformation.new(info_params)
+     unless @info.valid?
+       render :new_store_information, status: :unprocessable_entity and return
+     end
+     session["devise.regist_data"]["store_information"]= {store: @info.attributes}
+     @category = @store.store_categories.build
+     render :new_store_category, status: :accepted
+  end
+
+  def create_store_category
+    @store = Store.new(session["devise.regist_data"]["store"])
+    @address = session["devise.regist_data"]["store_address"]["store"]
+    @info_attributes = session["devise.regist_data"]["store_information"]
+    @info = StoreInformation.new(@info_attributes)
+    binding.pry 
+    @category = StoreCategory.new(category_params)
+    # @address_attributes = session["devise.regist_data"]["store_address"]["store"].except("id", "created_at", "updated_at")
+     unless @category.valid?
+       render :new_store_category, status: :unprocessable_entity and return
+     end
+    @store.build_store_information(@info.attributes)
+    @store.save
+    @store.create_store_address!(@address.attributes)
+    @store.create_store_information!(@info.attributes)
+    session["devise.regist_data"]["store"].clear
+    session["devise.regist_data"] ["store_address"].clear
+    session["devise.regist_data"]["store_information"].clear
+    sign_in(:store, @store)
+    redirect_to publicstore_path(@store)
   end
  
   private
@@ -46,6 +94,13 @@ class Stores::RegistrationsController < Devise::RegistrationsController
     params.require(:store_address).permit(:postal_code, :pref_id, :address, :phone_number)
   end
 
+  def info_params
+    params.require(:store_information).permit(:business_hours, :details)
+  end
+
+  def category_params
+    params.require(:store_category).permit(:category_id)
+  end
   # POST /resource
   # def create
   #   super

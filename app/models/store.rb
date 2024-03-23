@@ -6,4 +6,7 @@ class Store < ApplicationRecord
 
   validates :name,presence: true
   has_one :store_address
+  has_one :store_information
+  has_many :store_categories
+  has_many :categories, through: :store_categories
 end
