@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'publicstores#index'
+  get '/stores', to: 'publicstores#index'
   devise_for :stores, controllers: {
     registrations: "stores/registrations",
     sessions: "stores/sessions",
@@ -9,6 +10,12 @@ Rails.application.routes.draw do
   devise_scope :store do
     get 'store_addresses', to: 'stores/registrations#new_store_address'
     post 'store_addresses', to: 'stores/registrations#create_store_address'
+
+    get 'store_informations', to: 'stores/registrations#new_store_information'
+    post 'store_informations', to: 'stores/registrations#create_store_information'
+
+    get 'store_categories', to: 'users/registrations#new_store_category'
+    post 'store_categories', to: 'users/registrations#create_store_category'
   end
   devise_for :customers, controllers: {
     registrations: "customers/registrations",
