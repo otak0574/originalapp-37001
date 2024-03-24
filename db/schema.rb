@@ -58,7 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_045724) do
   end
 
   create_table "store_informations", charset: "utf8", force: :cascade do |t|
-    t.string "business_hours", null: false
+    t.integer "business_hours_start_id", null: false
+    t.integer "business_hours_end_id", null: false
     t.string "details", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

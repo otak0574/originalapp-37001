@@ -13,9 +13,6 @@ Rails.application.routes.draw do
 
     get 'store_informations', to: 'stores/registrations#new_store_information'
     post 'store_informations', to: 'stores/registrations#create_store_information'
-
-    get 'store_categories', to: 'users/registrations#new_store_category'
-    post 'store_categories', to: 'users/registrations#create_store_category'
   end
   devise_for :customers, controllers: {
     registrations: "customers/registrations",

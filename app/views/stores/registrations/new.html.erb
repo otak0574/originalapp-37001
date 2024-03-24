@@ -27,6 +27,16 @@
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
+      <div class="field">
+        <%= f.label :category_ids, "取り扱い商品の分類(複数選択可)" %><br />
+        <% Category.all.each do |category| %>
+          <div class="form-check">
+            <%= check_box_tag "store[category_ids][]", category.id, @store.category_ids.include?(category.id), id: dom_id(category) %>
+            <%= label_tag dom_id(category), category.name %><br>
+          </div>
+          <% end %>
+      </div>
+
       <div class="actions">
         <%= f.submit "NEXT" %>
       </div>

@@ -83,11 +83,17 @@ input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="date"],
-input[type="number"] {
+input[type="number"],
+textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+input[type="checkbox"]{
+  appearance: checkbox;
+  -webkit-appearance: checkbox;
 }
 
 .actions {

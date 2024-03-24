@@ -10,6 +10,7 @@ class PublicstoresController < ApplicationController
 
   def show
     # 実装内容
+    @store = Store.find(params[:id])
   end
 
   def edit
