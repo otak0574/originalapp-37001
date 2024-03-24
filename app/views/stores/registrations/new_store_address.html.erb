@@ -1,0 +1,33 @@
+<h2>住所情報登録</h2>
+
+<%= form_for @address do |f| %>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <%= render "devise/shared/error_messages", resource: @address %>
+      <div class="field">
+        <%= f.label :postal_code, "郵便番号" %><br />
+        <%= f.text_field :postal_code %>
+      </div>
+
+      <div class="field">
+        <%= f.label :pref_id, "都道府県" %><br />
+        <%= f.collection_select(:pref_id, Pref.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :address, "住所" %><br />
+        <%= f.text_field :address %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone_number, "店舗電話番号" %><br />
+        <%= f.telephone_field :phone_number %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "NEXT" %>
+      </div>
+      <button type="button" onclick="history.back();">戻る</button>
+    </div>
+  </div>
+<% end %>

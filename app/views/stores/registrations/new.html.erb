@@ -1,11 +1,9 @@
-<div class="contents row">
-  <div class="container">
-    <h2>ストア管理者新規登録</h2>
+<h2>ストア管理者新規登録</h2>
 
-    <%= form_with model: @store, url: registration_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
-
-      <%= render "customers/shared/error_messages", resource: resource %>
-
+  <%= form_for(@store, url: store_registration_path) do |f| %>
+  <div class='form-wrap'>
+    <%= render "devise/shared/error_messages", resource: @store %>
+    <div class='form-header'>
       <div class="field">
         <%= f.label :name, "店舗名" %><br />
         <%= f.text_field :name %>
@@ -30,45 +28,20 @@
       </div>
 
       <div class="field">
-        <%= f.label :phone_number, "店舗電話番号" %><br />
-        <%= f.telephone_field :phone_number %>
-      </div>
-
-      <div class="field">
-        <%= f.label :business_hours, "営業時間" %><br />
-        <%= f.text_field :business_hours %>
-      </div>
-
-      <div class="field">
-        <%= f.label :category_id, "取り扱い商品の分類(複数選択可)" %><br />
-        <%= f.text_field :category_id %>
-      </div>
-
-      <div class="field">
-        <%= f.label :post_number, "郵便番号" %><br />
-        <%= f.text_field :post_number %>
-      </div>
-
-      <div class="field">
-        <%= f.label :address, "住所" %><br />
-        <%= f.text_field :address %>
-      </div>
-
-      <div class="field">
-        <%= f.label :details, "店舗説明"%><br />
-        <%= f.text_area :details %>
-      </div>
-
-      <div class="field">
-        <%= f.label :delivery_time, "配達時間"%><br />
-        <%= f.text_field :delivery_time %>
+        <%= f.label :category_ids, "取り扱い商品の分類(複数選択可)" %><br />
+        <% Category.all.each do |category| %>
+          <div class="form-check">
+            <%= check_box_tag "store[category_ids][]", category.id, @store.category_ids.include?(category.id), id: dom_id(category) %>
+            <%= label_tag dom_id(category), category.name %><br>
+          </div>
+          <% end %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "NEXT" %>
       </div>
     <% end %>
 
-    <%= render "stores/shared/links" %>
+    <%= render "devise/shared/links" %>
   </div>
 </div>

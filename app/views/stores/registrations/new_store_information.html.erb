@@ -1,0 +1,31 @@
+<h2>店舗情報登録</h2>
+
+<%= form_for @info do |f| %>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <%= render "devise/shared/error_messages", resource: @info %>
+
+      <div class="field">
+        <%= f.label :business_hours_start_id, "営業開始時間" %><br />
+        <%= f.collection_select :business_hours_start_id, Hour.all, :id, :name, {}, {class: "select-box", id: "business_hours_start"} %>
+
+      </div>
+
+      <div class="field">
+        <%= f.label :business_hours_end_id, "営業終了時間" %><br />
+        <%= f.collection_select :business_hours_end_id, Hour.all, :id, :name, {}, {class: "select-box", id: "business_hours_end"} %>
+      </div>
+      
+
+      <div class="field">
+        <%= f.label :details, "店舗説明"%><br />
+        <%= f.text_area :details ,placeholder: '店舗についての説明を入力してください。ユニークな特徴や、お客様が期待できることを含めます。'%>
+      </div>
+      
+      <div class="actions">
+        <%= f.submit "NEXT" %>
+      </div>
+      <button type="button" onclick="history.back();">戻る</button>
+    </div>
+  </div>
+<% end %>

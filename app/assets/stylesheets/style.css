@@ -1,5 +1,69 @@
 /* 基本スタイル */
 /* **********************************************************************************************************************************************************
+***ヘッダー
+*********************************************************************************************************************************************************** */
+.header-logged-in {
+  background-color: #f7f5f0; /* ログイン時の背景色 */
+}
+
+.header-logged-out {
+  background-color: #ffffff; /* ログインしていない時の背景色 */
+}
+
+.fa-carrot{
+  color:#ff7017;
+}
+
+.navbar-brand{
+  text-decoration: none !important;
+  color:#003d2a !important;
+  font-weight: bold;
+  font-size: 20px !important;
+}
+
+.header-container{
+  display:flex;
+}
+
+.d-flex{
+  width:70%;
+  height: 70%;
+}
+
+.shopping-cart {
+  position: relative;
+  display: inline-block;
+  color: #333; /* カートアイコンの色 */
+  font-size: 24px; /* カートアイコンのサイズ */
+  margin-right:20px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #82c91e; /* バッジの背景色 */
+  color: white; /* バッジのテキスト色 */
+  border-radius: 50%; /* 角を丸くする */
+  padding: 5px 10px; /* 内部の余白 */
+  font-size: 12px; /* バッジのテキストサイズ */
+}
+.location-link {
+  text-decoration: none; /* 下線を消す */
+  color: black; /* テキストの色 */
+  font-size: 16px; /* テキストのサイズ */
+  display: inline-flex; /* アイコンと数字を横並びにする */
+  align-items: center; /* アイテムを縦方向に中央揃えにする */
+  gap: 5px; /* アイコンと数字の間にスペースを作る */
+  margin-right: 20px;
+}
+
+.location-link .fa {
+  font-size: 24px; /* アイコンのサイズを大きくする */
+}
+
+
+/* **********************************************************************************************************************************************************
 ***新規登録画面
 *********************************************************************************************************************************************************** */
 body {
@@ -10,72 +74,48 @@ body {
   padding: 20px;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+
+/* 基本的なフォームスタイリング */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-h2 {
-  color: #007bff;
-  margin-bottom: 20px;
+input[type="checkbox"]{
+  appearance: checkbox;
+  -webkit-appearance: checkbox;
 }
 
-.field,
 .actions {
-  margin-bottom: 15px;
+  margin-top: 20px;
 }
 
-.field label {
-  display: block;
-  /* margin-bottom: 5px; */
-  font-weight: bold;
-}
-
-.field input[type="email"],
-.field input[type="password"],
-.field input[type="tel"],
-.field input[type="text"],
-.field textarea{
+input[type="submit"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ced4da;
+  border: none;
   border-radius: 4px;
-  line-height: 1.5;
-}
-
-.actions input[type="submit"] {
-  padding: 10px 15px;
-  color: #fff;
   background-color: #007bff;
-  border-color: #007bff;
-  border-radius: 4px;
-  cursor: pointer;
+  color: white;
   font-size: 16px;
+  cursor: pointer;
 }
 
-.actions input[type="submit"]:hover {
+input[type="submit"]:hover {
   background-color: #0056b3;
-  border-color: #0056b3;
 }
 
-.em {
-  font-size: 0.9em;
-  color: #6c757d;
-}
 
-/* リンクスタイル */
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 
 /* **********************************************************************************************************************************************************
 ***ログイン画面
@@ -160,11 +200,163 @@ a:hover {
 ***_links.html.erb ************************************************************************************************
 *********************************************************************************************************************************************************** */
 .devise-link{
-  text-decoration: none; /* 下線を取り除く */
-  color: black; /* テキストのデフォルトカラーをグレーに設定 */
+  text-decoration: none; 
+  color: black;
 }
 
 .devise-link:hover{
-  color: gray; /* ホバー時のテキストカラーを黒に変更 */
+  color: #303c39;
   text-decoration: none;
+}
+
+/* **********************************************************************************************************************************************************
+***ログアウトユーザートップページ ************************************************************************************************
+*********************************************************************************************************************************************************** */
+body, img {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container{
+  width: 80%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px auto;
+  background-color: #f8f9fa;
+}
+
+.store-choice{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:30px;
+  font-weight: bold;
+  color: #303c39;
+  margin-top:30px;
+}
+
+.grid-container {
+  display: grid;
+  position: relative;
+}
+
+.top-image {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-text {
+  grid-area: 1 / 1 / 2 / 2;
+  color: white; /* 文字色は背景画像に応じて調整 */
+  align-self: center;
+  justify-self: start;
+  position: relative; /* この行を追加 */
+  z-index: 1; /* この行を追加 */
+  margin:10px;
+  font-size:24px;
+  font-weight: bold;
+}
+
+.form-control {
+   width: 60%;
+}
+input.form-control[type="search"] {
+  width: 60%; /* あるいは任意の幅 */
+}
+
+.none-text-decoration{
+  text-decoration: none;
+  color: #303c39;
+}
+
+.none-text-decoration:hover{
+  text-decoration: none;
+  color: #303c39;
+}
+
+
+/* **********************************************************************************************************************************************************
+***ログインユーザートップページ ************************************************************************************************
+*********************************************************************************************************************************************************** */
+.scrolling-wrapper {
+  position: relative;
+  overflow-x: hidden;
+  display:flex;
+  justify-content: center;
+  background-color: #f7f5f0;
+}
+
+.cards-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  height: 80px;
+  width: 90%;
+}
+
+.card {
+  flex: 0 0 auto; /* カードが縮まないように設定 */
+  width: 70px; /* カードの幅 */
+  margin: 0 24px 0 24px; /* カード間の余白 */
+  background-color: #f7f5f0;
+}
+
+
+
+.category-logo{
+  height:100%;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color:#003d2a;
+}
+
+.left-scroll-btn {
+  left: 0;
+}
+
+.right-scroll-btn {
+  right: 0;
+}
+
+.fa-solid{
+  color:#003d2a;
+}
+
+.category{
+  text-decoration: none;
+}
+
+
+
+/* **********************************************************************************************************************************************************
+***共通ユーザートップページ ************************************************************************************************
+*********************************************************************************************************************************************************** */
+
+.store-logo{
+  width:60%;
+  padding: 5px;
+  border: 1px solid #ecedec;
+  border-radius: 5px;
+}
+
+.store-logo-parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-category{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.category-store{
+  font-size: 24px;
+  font-weight: bold;
 }
