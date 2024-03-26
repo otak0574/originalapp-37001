@@ -1,0 +1,47 @@
+<h2>商品登録ページ</h2>
+
+  <%= form_for(@item, url: new_item_path) do |f| %>
+  
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <div class="field">
+        <%= f.label :name, "店舗名" %><br />
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, "店舗メールアドレス" %><br />
+        <%= f.email_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "パスワード" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上入力してください)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワード確認"%><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category_ids, "取り扱い商品の分類(複数選択可)" %><br />
+        <% Category.all.each do |category| %>
+          <div class="form-check">
+            <%= check_box_tag "store[category_ids][]", category.id, @store.category_ids.include?(category.id), id: dom_id(category) %>
+            <%= label_tag dom_id(category), category.name %><br>
+          </div>
+          <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "NEXT" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
