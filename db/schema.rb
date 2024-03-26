@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_23_045724) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_093745) do
   create_table "categories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,6 +35,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_045724) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "items", charset: "utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "details", null: false
+    t.integer "price", null: false
+    t.string "image", null: false
+    t.integer "sale_price"
+    t.string "category", null: false
+    t.string "tag"
+    t.string "status", null: false
+    t.integer "shelf_number", null: false
+    t.bigint "store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_items_on_store_id"
   end
 
   create_table "store_addresses", charset: "utf8", force: :cascade do |t|
@@ -80,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_23_045724) do
     t.index ["reset_password_token"], name: "index_stores_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "items", "stores"
   add_foreign_key "store_addresses", "stores"
   add_foreign_key "store_categories", "categories"
   add_foreign_key "store_categories", "stores"

@@ -76,6 +76,11 @@ class Stores::RegistrationsController < Devise::RegistrationsController
       render :new_store_information, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @store = Store.find(params[:id])
+    @store_address = @store.store_address
+  end
  
   private
  
