@@ -11,7 +11,7 @@
 
       <div class="field">
         <%= f.label :image, "画像" %>
-        <%= f.price :image %>
+        <%= image_tag item.image.variant(resize: '500x500'), class: 'item_image' if item.image.attached? %>
       </div>
 
       <div class="field">
