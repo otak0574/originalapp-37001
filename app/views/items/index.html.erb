@@ -5,26 +5,43 @@
   <div class='form-wrap'>
     <div class='form-header'>
       <div class="field">
-        <%= f.label :name, "店舗名" %><br />
+        <%= f.label :name, "商品名" %><br />
         <%= f.text_field :name %>
       </div>
 
       <div class="field">
-        <%= f.label :email, "店舗メールアドレス" %><br />
-        <%= f.email_field :email %>
+        <%= f.label :image, "画像" %>
+        <%= f.price :image %>
       </div>
 
       <div class="field">
-        <%= f.label :password, "パスワード" %>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 文字以上入力してください)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.label :price, "価格" %>
+        <%= f.price :price %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :sale_price, "セール価格" %>
+        <%= f.price :sale_price %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, "パスワード確認"%><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.label :tag, "検索用タグ" %>
+        <%= f.price :tag %>
+      </div>
+
+      <div class="field">
+        <%= f.label :status, "1ロットの量" %>
+        <%= f.price :sale_price %>
+      </div>
+
+      <div class="field">
+        <%= f.label :shelf_number, "棚番号" %>
+        <%= f.price :shelf_number %>
+      </div>
+
+      <div class="field">
+        <%= f.label :details, "商品詳細" %><br />
+        <%= f.details :details %>
       </div>
 
       <div class="field">
