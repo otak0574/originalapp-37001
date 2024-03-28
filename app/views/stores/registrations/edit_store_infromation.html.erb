@@ -1,6 +1,6 @@
 <h2>店舗情報登録</h2>
 
-<%= form_for @info do |f| %>
+<%= form_with model: @info, local: true do |f| %>
   <div class='form-wrap'>
     <div class='form-header'>
       <%= render "devise/shared/error_messages", resource: @info %>

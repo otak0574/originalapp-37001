@@ -1,6 +1,6 @@
 <h2>住所情報登録</h2>
 
-<%= form_for @address do |f| %>
+<%= form_with model: @address, local: true do |f| %>
   <div class='form-wrap'>
     <div class='form-header'>
       <%= render "devise/shared/error_messages", resource: @address %>

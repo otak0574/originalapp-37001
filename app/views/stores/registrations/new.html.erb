@@ -1,7 +1,7 @@
 <h2>ストア管理者新規登録</h2>
 
-  <%= form_for(@store, url: store_registration_path) do |f| %>
-  
+<%= form_with(model: @store, url: store_registration_path, local: true) do |f| %>
+
   <div class='form-wrap'>
     <%= render "devise/shared/error_messages", resource: @store %>
     <div class='form-header'>
