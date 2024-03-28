@@ -5,11 +5,16 @@ class ItemsController < ApplicationController
   end
 
   def new
-
+    @item = Item.new
   end
 
   def create
-
+    @item = Item.create(item_params)
+    if @item.save
+      redirect_to items_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -27,7 +32,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :price, :sale_price, :tag_id, :shelf_number, :category_id).merge(store_id: current_store.id)
+    params.require(:item).permit(:name, :image, :price, :sale_price, :tag, :status, :details, :shelf_number).merge(store_id: current_store.id)
     
   end
 end
