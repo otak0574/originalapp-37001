@@ -7,7 +7,7 @@ const itemPreview = () => {
   if (!postForm) return null;
 
  
-  const fileField = document.querySelector('input[type="file"][name="item[image]"]');
+  const fileField = document.querySelector('input[type="file"][name="item_form[image]"]');
   // input要素で値の変化が起きた際に呼び出される関数
   fileField.addEventListener('change', function(e){
   // 古いプレビューが存在する場合は削除(最後に記述する)
