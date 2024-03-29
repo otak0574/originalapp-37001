@@ -1,7 +1,6 @@
 <h2>商品登録ページ</h2>
 
-  <%= form_with model: @item, id: 'new_item', local: true do |f| %>
-   <%=render 'shared/error_messages', model: f.object %>
+  <%= form_with model: @item_form, url: items_path, method: :post, id: 'new_item', local: true do |f| %>
   <div class='form-wrap'>
     <div class='form-header'>
       <div class="field">
@@ -44,8 +43,6 @@
         <%= f.label :details, "商品詳細" %><br />
         <%= f.text_area :details, placeholder:'岐阜県産' %>
       </div>
-
-      
 
       <div class="actions">
         <%= f.submit "NEXT" %>

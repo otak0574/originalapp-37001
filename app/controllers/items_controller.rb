@@ -5,15 +5,16 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item_form = ItemForm.new
   end
 
   def create
-    @item = Item.create(item_params)
-    if @item.save
+    @item_form = ItemForm.new(item_form_params)
+    if @item_form.valid?
+      @item_form.save
       redirect_to items_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -21,9 +22,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    item_attributes = @item.attributes
+    @item_form = ItemForm.new(item_attributes)
   end
 
   def update
+    @item_form = ItemForm.new(item_form_params)
+    if @item_form.valid?
+      @item_form.update(item_form_params, @item)
+      redirect_to items_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -31,8 +41,7 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:name, :image, :price, :sale_price, :tag, :status, :details, :shelf_number).merge(store_id: current_store.id)
-    
+  def item_form_params
+    params.require(:item_form).permit(:name, :image, :price, :sale_price, :tag, :status, :details, :shelf_number, :category).merge(store_id: current_store.id)
   end
 end
