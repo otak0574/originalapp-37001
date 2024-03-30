@@ -71,10 +71,15 @@ class Stores::RegistrationsController < Devise::RegistrationsController
     if @store.save 
       session["devise.regist_data"].clear
       sign_in(:store, @store)
-      redirect_to publicstore_path(@store)
+      redirect_to new_item_path(@store)
     else
       render :new_store_information, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @store = Store.find(params[:id])
+    @store_address = @store.store_address
   end
  
   private

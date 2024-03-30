@@ -9,4 +9,5 @@ class Store < ApplicationRecord
   has_one :store_information
   has_many :store_categories
   has_many :categories, through: :store_categories
+  has_many :items
 end
