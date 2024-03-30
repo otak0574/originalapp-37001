@@ -1,7 +1,10 @@
 class ItemForm
   include ActiveModel::Model
   #ItemFormクラスのオブジェクトがItemモデルの属性を扱えるようにする
-  attr_accessor :name, :image, :price, :sale_price, :tag, :status, :details, :shelf_number, :category, :store_id
+  attr_accessor(
+    :name, :image, :price, :sale_price, :tag, :status, :details, 
+    :shelf_number, :category, :store_id, :id, :created_at, :updated_at
+    )
   validates :name, :image, :price, :status, :details, :shelf_number, presence: true
 
   def save

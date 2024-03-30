@@ -1,20 +1,68 @@
-<div class="main-container">
-    <% @store.each do |store|%>
-      <%= link_to publicstore_path(store.id), class: "none-text-decoration" do %>
-        <div class="card mb-3 " style="width: 400px;">
-          <div class="row g-0">
-            <div class="col-md-4 store-logo-parent">
-              <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= store.name %></h5>
-                <%# <p class="card-text"><%= store.business_hours</p> %>
-                <%# <p class="card-text"><small class="text-body-secondary"><%= store.category_id</small></p> %>
-              </div>
+
+<div class="main-container ">
+  <div class="row">
+    <% @stores.each do |store| %>
+      <!-- カードの幅を調整するために.col-*クラスを適用 -->
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+        <!-- borderless-cardクラスを追加してボーダーと影を削除 -->
+        <div class="card borderless-card text-center" style="max-width: 9rem;"> <!-- 幅を半分に設定 -->
+          <%= link_to items_path(store.id), class: "none-text-decoration" do %>
+            <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
+          <% end %>
+          <div class="card-body text-center">
+            <p class="card-title"><%= store.name %></p>
+            <div class="business-time">
+              <% business_hours_start = Hour.find(store.store_information.business_hours_start_id) rescue nil %>
+                <p class="card-text"><%= business_hours_start.name %></p>
+              <p>-</p>
+              <% business_hours_end = Hour.find(store.store_information.business_hours_end_id) rescue nil %>
+                <p class="card-text"><%= business_hours_end.name %></p>
             </div>
           </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
+</div>
+
+
+<div class="main-container">
+  <h1>おすすめのストア</h1>
+  <div class="row">
+    <% @stores.each do |store|%>
+      <div class="col-md-4">
+        <%= link_to items_path(store.id), class: "none-text-decoration" do %>
+          <div class="card mb-3"  style="max-width: 400px;">
+            <div class="row g-0">
+              <div class="col-md-4 store-logo-parent">
+                <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><%= store.name %></h5>
+                  <div class="horizontal">
+                    <% business_hours_start = Hour.find(store.store_information.business_hours_start_id) rescue nil %>
+                    <% if business_hours_start %>
+                      <p class="card-text"><%= business_hours_start.name %></p>
+                    <% else %>
+                      <p class="card-text">Business hours not set</p>
+                    <% end %>
+                    <p>-</p>
+                    <% business_hours_end = Hour.find(store.store_information.business_hours_end_id) rescue nil %>
+                    <% if business_hours_end %>
+                      <p class="card-text"><%= business_hours_end.name %></p>
+                    <% else %>
+                      <p class="card-text">Business hours not set</p>
+                    <% end %>
+                  </div>
+                  <%# <p class="card-text"><%= store.store_information.business_hours_start_id.name %>
+                  <%# <p class="card-text"><small class="text-body-secondary"><%= store.category_id</small></p> %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

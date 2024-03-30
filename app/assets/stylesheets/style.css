@@ -217,13 +217,32 @@ body, img {
   padding: 0;
 }
 
+.borderless-card {
+  border: none !important; /* ボーダーを削除 */
+}
+
 .main-container{
   width: 80%;
-  height: auto;
-  display: flex;
-  justify-content: space-between;
   margin: 50px auto;
-  background-color: #f8f9fa;
+}
+
+.main-container h1{
+  font-weight:bold;
+}
+
+.card-title{
+  font-weight:bold;
+  font-size: 20px;
+}
+
+.business-time{
+  display: flex;
+  justify-content: center;
+  margin: none;
+}
+
+.horizontal{
+  display: flex;
 }
 
 .store-choice{
@@ -288,20 +307,20 @@ input.form-control[type="search"] {
   background-color: #f7f5f0;
 }
 
-.cards-container {
+/* .cards-container {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
   height: 80px;
   width: 90%;
-}
-
+} */
+/* 
 .card {
   flex: 0 0 auto; /* カードが縮まないように設定 */
-  width: 70px; /* カードの幅 */
-  margin: 0 24px 0 24px; /* カード間の余白 */
-  background-color: #f7f5f0;
-}
+  /* width: 70px; カードの幅 */
+  /* margin: 0 24px 0 24px; カード間の余白 */
+  /* background-color: #f7f5f0; */
+/* } */ */
 
 
 

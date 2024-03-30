@@ -2,7 +2,7 @@ class PublicstoresController < ApplicationController
   before_action :authenticate_store!,except: [:index]
 
   def index
-    @store = Store.all
+    @stores = Store.includes(:store_information).all
   end
 
   def new
