@@ -1,1 +1,40 @@
-<li><%= link_to "商品の登録", new_item_path, class: 'btn btn-primary'%></li>
+<!-- 商品の詳細ページ items/show.html.erb -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <%= image_tag @item.image, class: "img-fluid", alt: "Item image" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2><%= @item.name %></h2>
+      <p><%= "¥#{@item.price}" %></p>
+      <div class="d-grid gap-2">
+        <%= button_to "Add to cart", '#', method: :post, class: "btn btn-success btn-lg" %>
+      </div>
+      <div class="my-3">
+        <p><strong>In season</strong></p>
+        <p><%= @item.details %></p>
+      </div>
+      <p class="text-muted">100% satisfaction guarantee</p>
+    </div>
+    <% if store_signed_in? %>
+      <%= link_to "商品の編集", edit_item_path ,class: "btn btn-success"%>
+    <% end %>
+  </div>
+
+  <h3 class="mt-4">よく一緒に購入される商品</h3>
+  <div class="row">
+    <% @items.each do |items| %>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <%= image_tag items.image, class: "card-img-top", alt: items.name %>
+          <div class="card-body">
+            <h5 class="card-title"><%= items.name %></h5>
+            <%= button_to "Add", '#', method: :post, class: "btn btn-success" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

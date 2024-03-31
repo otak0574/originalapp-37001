@@ -6,7 +6,7 @@
       <div class="col-6 col-sm-6 col-md-3 col-lg-3">
         <!-- borderless-cardクラスを追加してボーダーと影を削除 -->
         <div class="card borderless-card text-center" style="max-width: 9rem;"> <!-- 幅を半分に設定 -->
-          <%= link_to items_path(store.id), class: "none-text-decoration" do %>
+          <%= link_to publicstore_path(store.id), class: "none-text-decoration" do %>
             <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
           <% end %>
           <div class="card-body text-center">
@@ -17,6 +17,7 @@
               <p>-</p>
               <% business_hours_end = Hour.find(store.store_information.business_hours_end_id) rescue nil %>
                 <p class="card-text"><%= business_hours_end.name %></p>
+                <p class="card-text"><%= @item.tags.first&.tag_name %></p>
             </div>
           </div>
         </div>
