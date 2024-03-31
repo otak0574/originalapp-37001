@@ -9,7 +9,6 @@ class PublicstoresController < ApplicationController
   end
 
   def show
-    # 実装内容
     @store = Store.find(params[:id])
     @items = @store.items
   end

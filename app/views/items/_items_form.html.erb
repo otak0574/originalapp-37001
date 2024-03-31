@@ -1,0 +1,51 @@
+  <%= form_with model: @item_form, url: url, method: method, id: 'new_item', local: true do |f| %>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <%= render "items/form_error_message" %>
+      <div class="field">
+        <%= f.label :name, "商品名" %><br />
+        <%= f.text_field :name, placeholder: '商品名を入力' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :image, "画像" %>
+        <%= f.file_field :image%>
+        <div id="previews"></div>
+      </div>
+
+      <div class="field">
+        <%= f.label :price, "価格" %>
+        <%= f.number_field :price, placeholder: '金額を入力' %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :sale_price, "セール価格" %>
+        <%= f.number_field :sale_price, placeholder: '金額を入力' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :tag, "検索用タグ" %>
+        <%= f.text_field :tag_name, placeholder: '商品のタグを入力'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :status, "1ロットの量" %>
+        <%= f.text_field :status, placeholder: '商品量を入力' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :shelf_number, "棚番号" %>
+        <%= f.text_field :shelf_number, placeholder: '店舗内の棚番号を入力'%>
+      </div>
+
+      <div class="field">
+        <%= f.label :details, "商品詳細" %><br />
+        <%= f.text_area :details, placeholder:'詳細情報を入力' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "保存する" %>
+      </div>
+    <% end %>
+  </div>
+</div>

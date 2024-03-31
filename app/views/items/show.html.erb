@@ -2,45 +2,36 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-6">
-      <!-- 画像スライダーまたは大きな画像 -->
-      <%= image_tag "strawberries.jpg", class: "img-fluid", alt: "Strawberries" %>
-                    <%= image_tag Item.image.variant(resize: '500x500'), class: "card-img-top", alt: "Item image" %>
-
-      <!-- 画像のサムネイル、必要に応じて画像スライダーに置き換える -->
-      <div class="d-flex justify-content-center mt-2">
-        <%= image_tag "strawberry-thumbnail.jpg", class: "img-thumbnail mx-1", alt: "Strawberries" %>
-        <!-- 他のサムネイル画像 -->
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <%= image_tag @item.image, class: "img-fluid", alt: "Item image" %>
       </div>
     </div>
-
     <div class="col-md-6">
-      <!-- 商品名と価格 -->
-      <h2>Strawberries, 2 lbs</h2>
-      <p class="text-success">$6.21 each</p>
-      <!-- アクションボタン -->
+      <h2><%= @item.name %></h2>
+      <p><%= "¥#{@item.price}" %></p>
       <div class="d-grid gap-2">
-        <%= button_to "Add to cart", cart_path(item_id: @item.id), method: :post, class: "btn btn-success btn-lg" %>
+        <%= button_to "Add to cart", '#', method: :post, class: "btn btn-success btn-lg" %>
       </div>
-      <!-- その他の商品情報 -->
       <div class="my-3">
         <p><strong>In season</strong></p>
-        <p><%= @item.description %></p>
+        <p><%= @item.details %></p>
       </div>
-      <!-- 商品の保証 -->
       <p class="text-muted">100% satisfaction guarantee</p>
     </div>
+    <% if store_signed_in? %>
+      <%= link_to "商品の編集", edit_item_path ,class: "btn btn-success"%>
+    <% end %>
   </div>
 
-  <!-- よく一緒に購入される商品 -->
-  <h3 class="mt-4">Often Bought With</h3>
+  <h3 class="mt-4">よく一緒に購入される商品</h3>
   <div class="row">
-    <% @related_items.each do |related_item| %>
+    <% @items.each do |items| %>
       <div class="col-6 col-md-3">
         <div class="card">
-          <%= image_tag related_item.image, class: "card-img-top", alt: related_item.name %>
+          <%= image_tag items.image, class: "card-img-top", alt: items.name %>
           <div class="card-body">
-            <h5 class="card-title"><%= related_item.name %></h5>
-            <%= button_to "Add", cart_path(item_id: related_item.id), method: :post, class: "btn btn-primary" %>
+            <h5 class="card-title"><%= items.name %></h5>
+            <%= button_to "Add", '#', method: :post, class: "btn btn-success" %>
           </div>
         </div>
       </div>

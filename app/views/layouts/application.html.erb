@@ -28,25 +28,33 @@
                 <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete }%></li>
               <% end %>
               <% if store_signed_in? %>
-                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-primary'%></li>
+                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-success'%></li>
+                <li><%= link_to "商品の登録", new_item_path, class: 'btn btn-success'%>
                 <%# <li><%= link_to "登録情報の編集", store_path(@store), class: 'btn btn-primary'%>
                 <%# <li><%= link_to "住所の編集", edit_store_address_path(@store_address), class: 'btn btn-primary'%>
                 <%# <li><%= link_to "概要の編集", edit_store_information_path(@store.store_information), class: 'btn btn-primary'%>
               <% else %>
-                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-primary'%>
-                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-primary'%>
+                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-success'%>
+                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-success'%>
               <% end %>
             </ul>
           </div>
         </div>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex w-100 p-3 justify-content-between" ">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex w-100 p-3 justify-content-between">
           <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="/">
-              <i class="fa-solid fa-carrot"></i>
-              サービス名
-              </a>
+              <% if store_signed_in? %> <!-- ストアがログインしているかどうかを確認 -->
+                <%= link_to publicstore_path(current_store), class: "navbar-brand" do  %> 
+                  <i class="fa-solid fa-carrot"></i>
+                  <%= current_store.name %><!-- ログインしているストアの詳細ページへのリンク -->
+                <% end %>
+              <% else %>
+                <%= link_to root_path, class: "navbar-brand" do  %> 
+                  <i class="fa-solid fa-carrot"></i>
+                  サービス名
+                <% end %>
+              <% end %>
             </div>
           </nav>
           <form class="d-flex" role="search">
@@ -66,7 +74,7 @@
             <% else %>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
-                <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-primary' %>
+                <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-success' %>
               </div>
             <% end %>
         </nav>
