@@ -1,5 +1,5 @@
 class PublicstoresController < ApplicationController
-  before_action :authenticate_store!,except: [:index]
+  before_action :authenticate_store!,except: [:index, :show]
 
   def index
     @stores = Store.includes(:store_information).all
@@ -9,8 +9,8 @@ class PublicstoresController < ApplicationController
   end
 
   def show
-    # 実装内容
     @store = Store.find(params[:id])
+    @items = @store.items
   end
 
   def edit

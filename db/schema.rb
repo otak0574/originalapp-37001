@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_27_034300) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_31_150955) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -65,13 +65,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_034300) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "item_tag_relations", charset: "utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_tag_relations_on_item_id"
+    t.index ["tag_id"], name: "index_item_tag_relations_on_tag_id"
+  end
+
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "details", null: false
     t.integer "price", null: false
     t.integer "sale_price"
     t.string "category"
-    t.string "tag"
     t.string "status", null: false
     t.integer "shelf_number", null: false
     t.bigint "store_id", null: false
@@ -123,8 +131,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_27_034300) do
     t.index ["reset_password_token"], name: "index_stores_on_reset_password_token", unique: true
   end
 
+  create_table "tags", charset: "utf8", force: :cascade do |t|
+    t.string "tag_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_name"], name: "index_tags_on_tag_name", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "item_tag_relations", "items"
+  add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "stores"
   add_foreign_key "store_addresses", "stores"
   add_foreign_key "store_categories", "categories"

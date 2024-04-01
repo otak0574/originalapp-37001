@@ -233,6 +233,7 @@ body, img {
 .card-title{
   font-weight:bold;
   font-size: 20px;
+  color:#343538;
 }
 
 .business-time{
@@ -307,22 +308,6 @@ input.form-control[type="search"] {
   background-color: #f7f5f0;
 }
 
-/* .cards-container {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  height: 80px;
-  width: 90%;
-} */
-/* 
-.card {
-  flex: 0 0 auto; /* カードが縮まないように設定 */
-  /* width: 70px; カードの幅 */
-  /* margin: 0 24px 0 24px; カード間の余白 */
-  /* background-color: #f7f5f0; */
-/* } */ */
-
-
 
 .category-logo{
   height:100%;
@@ -335,6 +320,35 @@ input.form-control[type="search"] {
   color:#003d2a;
 }
 
+
+.scrolling-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  border-bottom: 1px solid #dee2e6;
+}
+.cards-container {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+.card {
+  display: inline-block;
+  width: auto;
+  min-width: 120px;
+  margin-right: 16px; /* 最後のカード以外のカード間のスペース */
+}
+.card:last-child {
+  margin-right: 0; /* 最後のカードの余白を削除 */
+}
+.category-logo {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0 20px 0.5rem 20px;
+}
+.category-logo i {
+  display: block;
+  margin-bottom: 0.25rem;
+}
 .left-scroll-btn {
   left: 0;
 }
@@ -385,4 +399,56 @@ input.form-control[type="search"] {
 .preview-image{
   max-width: 100px;
   max-height: 100px;
+}
+
+/* **********************************************************************************************************************************************************
+***ストア商品一覧(publicstore/show.html.erb ************************************************************************************************
+*********************************************************************************************************************************************************** */
+.item-index{
+  height:calc(100vh - 88px);
+  display:flex; 
+  border-top:1px solid #ececec;
+}
+.side-container{
+  width:20%;
+  border-right:1px solid #ececec;
+  margin-right:10px;
+}
+
+.item-top{
+  font-size:24px;
+  font-weight: bold;
+  color:#343538;
+}
+
+.card-text{
+  color:#343538;
+  font-weight:lighter;
+}
+
+.item-image{
+  border-radius: 5px;
+}
+
+.store-link{
+  display:flex;
+}
+
+.store-image {
+  width: 80px;
+  height: 80px;
+  display: block; /* 画像をブロック要素として設定 */
+  margin-left: auto; /* 左マージンを自動に設定 */
+  margin-right: auto; /* 右マージンを自動に設定 */
+  border:1px solid #ececec;
+  border-radius:50%;
+}
+
+
+/* **********************************************************************************************************************************************************
+***ストア商品詳細ページ(items/show.html.erb ************************************************************************************************
+*********************************************************************************************************************************************************** */
+
+.card-img-top{
+  border-radius:10px;
 }
