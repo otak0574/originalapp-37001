@@ -5,6 +5,12 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
   def new
     @item_form = ItemForm.new
   end
@@ -50,7 +56,7 @@ class ItemsController < ApplicationController
   private
 
   def item_form_params
-    params.require(:item_form).permit(:name, :image, :price, :sale_price, :tag_name, :status, :details, :shelf_number, :category).merge(store_id: current_store.id)
+    params.require(:item_form).permit(:name, :tag_name, :image, :price, :sale_price, :status, :details, :shelf_number, :category).merge(store_id: current_store.id)
   end
 
   def set_item
