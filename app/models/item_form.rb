@@ -9,7 +9,7 @@ class ItemForm
   validates :name, :image, :price, :status, :details, :shelf_number, presence: true
 
   def save
-    item = Item.new(name: name, image: image, price: price, sale_price: sale_price, tag: tag, status: status, details: details, shelf_number: shelf_number, category: category, store_id: store_id)
+    item = Item.new(name: name, image: image, price: price, sale_price: sale_price, status: status, details: details, shelf_number: shelf_number, category: category, store_id: store_id)
     item.save
     if tag_name.present?
       tag = Tag.where(tag_name: tag_name).first_or_initialize

@@ -13,3 +13,4 @@ pin "@fortawesome/free-brands-svg-icons", to: "@fortawesome--free-brands-svg-ico
 pin "@fortawesome/free-regular-svg-icons", to: "@fortawesome--free-regular-svg-icons.js" # @6.5.1
 pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons.js" # @6.5.1
 pin "preview", to: "preview.js"
+pin "tag", to: "tag.js"
