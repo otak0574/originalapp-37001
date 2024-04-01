@@ -25,7 +25,11 @@ Rails.application.routes.draw do
     confirmations: "customers/confirmations"
 }
 
-resources :publicstores, only: [:show, :edit, :update]
-resources :items
+  resources :publicstores, only: [:show, :edit, :update]
+  resources :items do
+    collection do
+      get 'search'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

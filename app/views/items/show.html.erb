@@ -16,7 +16,7 @@
         <p><strong>In season</strong></p>
         <p><%= @item.details %></p>
       </div>
-      <p class="text-muted">100% satisfaction guarantee</p>
+      <p class="text-muted"><%= @item.tags.first&.tag_name %></p>
     </div>
     <% if store_signed_in? %>
       <%= link_to "商品の編集", edit_item_path ,class: "btn btn-success"%>
