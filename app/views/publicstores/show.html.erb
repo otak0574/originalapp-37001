@@ -1,52 +1,35 @@
-
-<div class="item-index">
-  <div class="side-container">
-    <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-      <div class="text-center my-3">
-        <%= link_to publicstore_path(@store.id), class: "none-text-decoration" do %>
-          <%= image_tag 'shop-solid.svg',class: 'store-image', alt: 'store' %>
-            <span class="fs-4"><%= @store.name%></span>
+<% if store_signed_in? %>
+  <div class="item-index">
+    <%= render "publicstores/sidebar"%>
+      <div class="list-group">
+        <% @items.each do |item| %>
+          <%= link_to edit_item_path(@store.id), class: "none-text-decoration" do%>
+            <div class="list-group-item list-group-item-action"><%= item.name %>  <%= "¥#{item.price}" %></div>
+          <% end %>
         <% end %>
       </div>
-      <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-          </li>
-          <li>
-          </li>
-          <li>
-          </li>
-          <!-- その他のリストアイテム -->
-        </ul>
-      <hr>
-      <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <strong>Categories</strong>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">Kirkland Signature</a></li>
-          <li><a class="dropdown-item" href="#">Produce</a></li>
-          <!-- その他のカテゴリー -->
-        </ul>
-      </div>
+  </div>
+<% else %>
+  <div class="item-index">
+    <%= render "publicstores/sidebar"%>
+    <div class="main-container">
+      <div class="item-top"><p>ベストセラー</p></div>
+      <div class="row custom-gap">
+        <% @items.each do |item| %>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3"> <!-- 画面サイズに応じてカードの数を調整 -->
+            <%= link_to item_path(item.id), class: "none-text-decoration item-image" do %>
+              <div class="card border-0" style="width: 12rem;">
+                <%= image_tag item.image.variant(resize: '500x500'), class: "card-img-top", alt: "Item image" %>
+                  <div class="card-body">
+                    <p class="card-title"><%= "¥#{item.price}" %></p>
+                    <p class="card-text"><%= item.name %><br><%= item.details %><br><%= item.status %></p>
+                    <p class="card-text"><%= item.tags.first&.tag_name %></p>
+                  </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div> 
     </div>
   </div>
-  <div class="main-container">
-    <div class="item-top"><p>ベストセラー</p></div>
-    <div class="row custom-gap">
-      <% @items.each do |item| %>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3"> <!-- 画面サイズに応じてカードの数を調整 -->
-          <%= link_to item_path(item.id), class: "none-text-decoration item-image" do %>
-            <div class="card border-0" style="width: 12rem;">
-              <%= image_tag item.image.variant(resize: '500x500'), class: "card-img-top", alt: "Item image" %>
-                <div class="card-body">
-                  <p class="card-title"><%= "¥#{item.price}" %></p>
-                  <p class="card-text"><%= item.name %><br><%= item.details %><br><%= item.status %></p>
-                </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div> 
-  </div>
-</div>
+<% end %>

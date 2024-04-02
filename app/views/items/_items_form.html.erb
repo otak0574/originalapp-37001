@@ -1,52 +1,73 @@
-  <%= form_with model: @item_form, url: url, method: method, id: 'new_item', local: true do |f| %>
-  <div class='form-wrap'>
-    <div class='form-header'>
-      <%= render "items/error_message" %>
-      <div class="field">
-        <%= f.label :name, "商品名" %><br />
-        <%= f.text_field :name, placeholder: '商品名を入力' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :image, "画像" %>
-        <%= f.file_field :image%>
-        <div id="previews"></div>
-      </div>
-
-      <div class="field">
-        <%= f.label :price, "価格" %>
-        <%= f.number_field :price, placeholder: '金額を入力' %>
-      </div>
+<div class="container">
+  <div class="col-md-10">
+    <div class="card p-4">
       
-      <div class="field">
-        <%= f.label :sale_price, "セール価格" %>
-        <%= f.number_field :sale_price, placeholder: '金額を入力' %>
-      </div>
+        <%= form_with model: @item_form, url: url, method: method, id: 'new_item', local: true do |f| %>
+          <%= render "items/error_message" %>
+          <div class="card-body">
 
-      <div class="field">
-        <%= f.label :tag, "検索用タグ" %>
-        <%= f.text_field :tag_name, placeholder: '商品のタグを入力'%>
-         <div id="search-result"></div>
-      </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :name, "商品名" %>
+            </span>
+            <%= f.text_field :name, placeholder: '商品名を入力' %>
+          </div>
 
-      <div class="field">
-        <%= f.label :status, "1ロットの量" %>
-        <%= f.text_field :status, placeholder: '商品量を入力' %>
-      </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :image, "画像" %>
+            </span>
+            <%= f.file_field :image%>
+            <div id="previews"></div>
+          </div>
+          
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :price, "価格" %>
+            </span>
+            <%= f.number_field :price, placeholder: '金額を入力' %>
+          </div>
 
-      <div class="field">
-        <%= f.label :shelf_number, "棚番号" %>
-        <%= f.text_field :shelf_number, placeholder: '店舗内の棚番号を入力'%>
-      </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :sale_price, "値引価格" %>
+            </span>
+            <%= f.number_field :sale_price, placeholder: '金額を入力' %>
+          </div>
 
-      <div class="field">
-        <%= f.label :details, "商品詳細" %><br />
-        <%= f.text_area :details, placeholder:'詳細情報を入力' %>
-      </div>
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :tag, "検索タグ" %>
+            </span>
+            <%= f.text_field :tag_name, placeholder: '商品のタグを入力'%>
+          </div>
 
-      <div class="actions">
-        <%= f.submit "保存する" %>
-      </div>
-    <% end %>
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :status, "商品量" %>
+            </span>
+            <%= f.text_field :status, placeholder: '商品量を入力' %>
+          </div>
+
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :shelf_number, "棚番号" %>
+            </span>
+            <%= f.text_field :shelf_number, placeholder: '店舗内の棚番号を入力'%>
+          </div>
+
+          <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :details, "商品詳細" %>
+            </span>
+            <%= f.text_area :details, placeholder:'詳細情報を入力' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "保存する" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
