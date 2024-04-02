@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
       @item_form.save
-      redirect_to items_path
+      redirect_to publicstore_path(current_store)
     else
       render :new, status: :unprocessable_entity
     end
