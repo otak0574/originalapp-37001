@@ -4,7 +4,7 @@
       <div class="list-group">
         <% @items.each do |item| %>
           <%= link_to edit_item_path(@store.id), class: "none-text-decoration" do%>
-            <div class="list-group-item list-group-item-action"><%= item.name %>  <%= "¥#{item.price}" %></div>
+            <div class="list-group-item list-group-item-action"><%= item.shelf_number %><%= item.name %></div>
           <% end %>
         <% end %>
       </div>

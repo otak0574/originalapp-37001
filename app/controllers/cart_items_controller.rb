@@ -28,6 +28,7 @@ class CartItemsController < ApplicationController
   # POST /cart_items or /cart_items.json
   def create
     item = Item.find(params[:item_id])
+    
     @cart_item = @cart.add_item(item)
     # @cart_item = @cart.cart_items.build(item: item)
     respond_to do |format|

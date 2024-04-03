@@ -1,21 +1,37 @@
-<p style="color: green"><%= notice %></p>
-<div class="container">
+<div class="container mt-4">
   <div class="card">
     <div class="card-body">
-      <div class="card-title h5"><strong>現在のカート</strong></div>
+      <div class="card-title h5 mb-4"><strong>現在のカート</strong></div>
       <% @cart.cart_items.each do |item| %>
-        <div>
-          <%= item.item.name %> × <%= item.quantity %>
+        <div class="card mb-2">
+          <div class="card-body">
+            <%= item.item.name %>
+            <span class="badge bg-warning"><%= number_to_currency(item.item.price, unit: "¥") %></span>
+            × 
+            <span class="badge bg-primary"><%= item.quantity %>個</span>
+            ＝
+            <span class="badge bg-danger"><%= number_to_currency(item.total_price, unit: "¥") %></span>
+          </div>
         </div>
       <% end %>
-      <div class="mt-4">
-        <%= link_to "カートの編集", edit_cart_path(@cart), class: "btn btn-warning" %>
-        <%= link_to "カート一覧", carts_path, class: "btn btn-secondary" %>
-        <%= link_to "買い物に戻る", publicstore_path(@stores), class: "btn btn-secondary" %>
+      <div class="container mt-4">
+        <span class="badge bg-secondary">合計金額</span> <span class="badge bg-success fs-5"><%= number_to_currency(@cart.total_price, unit: "¥") %></span>
       </div>
       <div class="mt-4">
-        <%= button_to "カートを削除", @cart, method: :delete, class: "btn btn-danger" %>
+        <%= button_to 'カートを空にする', @cart, method: :delete, class: 'btn btn-outline-danger', data: { turbo: false }, form: { onSubmit: "return check()" } %>
+        <%= link_to "買い物に戻る", publicstore_path(@stores), class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
 </div>
+<script>
+  function check(){
+    if(window.confirm('カートを空にしますか？')){ 
+      return true;
+    }
+    else{
+      window.alert('キャンセルされました'); 
+      return false; 
+    }
+  }
+</script>
