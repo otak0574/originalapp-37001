@@ -10,6 +10,7 @@ class CartsController < ApplicationController
   # GET /carts/1 or /carts/1.json
   def show
     @cart = Cart.find(params[:id])
+    @store_cart = @cart.store_id
     @cart_items = @cart.cart_items.includes(item: :store)
     
     @stores = @cart_items.map do |cart_item|
@@ -28,6 +29,7 @@ class CartsController < ApplicationController
 
   # POST /carts or /carts.json
   def create
+    @item = Item.find(params[:item_id])
     @cart = Cart.new(cart_params)
 
     respond_to do |format|
@@ -59,7 +61,7 @@ class CartsController < ApplicationController
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to markets_index_url, notice: 'カートが空になりました。' }
+      format.html { redirect_to root_path, notice: 'カートが空になりました。' }
       format.json { head :no_content }
     end
   end

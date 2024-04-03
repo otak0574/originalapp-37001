@@ -26,8 +26,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @store = Store.find(params[:id])
-    @items = @store.items
+    @store_id = @item.store_id
+    @items =  Item.where(store_id: @store_id)
   end
 
   def edit
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
 
     if @item_form.valid?
       @item_form.update(item_form_params, @item)
-      redirect_to items_path
+      redirect_to publicstore_path(current_store)
     else
       render :edit, status: :unprocessable_entity
     end
