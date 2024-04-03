@@ -51,9 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
 
   create_table "carts", charset: "utf8", force: :cascade do |t|
     t.bigint "customer_id"
+    t.bigint "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_carts_on_customer_id"
+    t.index ["store_id"], name: "index_carts_on_store_id"
   end
 
   create_table "categories", charset: "utf8", force: :cascade do |t|
@@ -160,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "items"
   add_foreign_key "carts", "customers"
+  add_foreign_key "carts", "stores"
   add_foreign_key "item_tag_relations", "items"
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "stores"
