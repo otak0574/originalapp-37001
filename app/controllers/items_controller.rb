@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show]
-  include CurrentCart
 
   def index
     @items = Item.all
