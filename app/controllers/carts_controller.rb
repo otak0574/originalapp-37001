@@ -30,8 +30,8 @@ class CartsController < ApplicationController
   # POST /carts or /carts.json
   def create
     @item = Item.find(params[:item_id])
+    binding.pry
     @cart = Cart.new(cart_params)
-
     respond_to do |format|
       if @cart.save
         format.html { redirect_to cart_url(@cart), notice: "Cart was successfully created." }
