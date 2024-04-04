@@ -11,4 +11,5 @@ class Store < ApplicationRecord
   has_many :categories, through: :store_categories
   has_many :items
   has_many :carts
+  has_many :orders
 end

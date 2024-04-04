@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :cart_items
   has_many :carts
+  has_many :orders
 
 
   validates :nickname, :phone_number, :birth_date, :first_name, :last_name, presence: true
