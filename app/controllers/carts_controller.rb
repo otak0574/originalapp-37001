@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[ show edit update destroy ]
+  before_action :set_cart, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_customer!
 
   # GET /carts or /carts.json
@@ -30,7 +30,6 @@ class CartsController < ApplicationController
   # POST /carts or /carts.json
   def create
     @item = Item.find(params[:item_id])
-    binding.pry
     @cart = Cart.new(cart_params)
     respond_to do |format|
       if @cart.save
