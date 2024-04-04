@@ -13,6 +13,9 @@
   <div class="item-index">
     <%= render "publicstores/sidebar"%>
     <div class="main-container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
       <div class="item-top"><p>ベストセラー</p></div>
       <div class="row custom-gap">
         <% @items.each do |item| %>
