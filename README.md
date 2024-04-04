@@ -98,10 +98,9 @@
 
 | column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| deli_add_id | references | null: false, foreign_key: true |
 | cart_id     | references | null: false, foreign_key: true |
 | customer_id | references | null: false, foreign_key: true |
-| cart_id     | references | null: false, foreign_key: true |
+
 
 
 ### Associations

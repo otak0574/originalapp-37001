@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :cart_items
   resources :carts
+  resources :orders, only:[:index, :create]
   root to: 'publicstores#index'
   get '/stores', to: 'publicstores#index'
   devise_for :stores, controllers: {

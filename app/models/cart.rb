@@ -4,6 +4,7 @@ class Cart < ApplicationRecord
   belongs_to :customer
 	belongs_to :store
 
+
   def add_item(item)
 		current_item = cart_items.find_by(item_id: item.id)
 		if current_item
