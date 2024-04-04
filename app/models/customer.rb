@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :cart_items
+  has_many :carts
 
   validates :nickname, :phone_number, :birth_date, :first_name, :last_name, presence: true
   validates :gender_id, presence: true, numericality: { only_integer: true }

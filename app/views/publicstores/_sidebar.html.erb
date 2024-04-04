@@ -1,0 +1,31 @@
+  <div class="side-container">
+    <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+      <div class="text-center my-3">
+        <%= link_to publicstore_path(@store.id), class: "none-text-decoration" do %>
+          <%= image_tag 'shop-solid.svg',class: 'store-image', alt: 'store' %>
+            <span class="fs-4"><%= @store.name%></span>
+        <% end %>
+      </div>
+      <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+          </li>
+          <li>
+          </li>
+          <li>
+          </li>
+          <!-- その他のリストアイテム -->
+        </ul>
+      <hr>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <strong>Categories</strong>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href="#">Kirkland Signature</a></li>
+          <li><a class="dropdown-item" href="#">Produce</a></li>
+          <!-- その他のカテゴリー -->
+        </ul>
+      </div>
+    </div>
+  </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_31_150955) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_150955) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cart_items", charset: "utf8", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "quantity", default: 1
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["item_id"], name: "index_cart_items_on_item_id"
+  end
+
+  create_table "carts", charset: "utf8", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.bigint "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_carts_on_customer_id"
+    t.index ["store_id"], name: "index_carts_on_store_id"
   end
 
   create_table "categories", charset: "utf8", force: :cascade do |t|
@@ -140,6 +159,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_31_150955) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "items"
+  add_foreign_key "carts", "customers"
+  add_foreign_key "carts", "stores"
   add_foreign_key "item_tag_relations", "items"
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "stores"

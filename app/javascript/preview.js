@@ -6,7 +6,6 @@ const itemPreview = () => {
   // 新規投稿・編集ページのフォームがないならここで終了。「!」は論理否定演算子。
   if (!postForm) return null;
 
- 
   const fileField = document.querySelector('input[type="file"][name="item_form[image]"]');
   // input要素で値の変化が起きた際に呼び出される関数
   fileField.addEventListener('change', function(e){

@@ -17,7 +17,6 @@
               <p>-</p>
               <% business_hours_end = Hour.find(store.store_information.business_hours_end_id) rescue nil %>
                 <p class="card-text"><%= business_hours_end.name %></p>
-                <p class="card-text"><%= @item.tags.first&.tag_name %></p>
             </div>
           </div>
         </div>
