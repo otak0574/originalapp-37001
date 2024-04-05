@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_05_043947) do
     t.string "city"
     t.string "house_number"
     t.string "building_name"
+    t.string "phone_number", null: false
     t.bigint "order_id", null: false
     t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
@@ -82,7 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_05_043947) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", null: false
-    t.string "phone_number", null: false
     t.date "birth_date", null: false
     t.integer "gender_id", null: false
     t.string "first_name", null: false
