@@ -6,6 +6,8 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :carts
   has_many :orders
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :gender
 
 
   validates :nickname, :phone_number, :birth_date, :first_name, :last_name, presence: true
