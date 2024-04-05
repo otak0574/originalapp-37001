@@ -2,6 +2,11 @@ class CartsController < ApplicationController
   before_action :set_cart, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_customer!
 
+  def purchase
+    session[:purchase_cart_id] = params[:id] # カートアイテムのIDからカートのIDをセッションに保存
+    redirect_to orders_path # 注文の新規作成ページにリダイレクト
+  end
+
   # GET /carts or /carts.json
   def index
     @customer_carts = current_customer.carts

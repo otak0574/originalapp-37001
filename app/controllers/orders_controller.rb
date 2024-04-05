@@ -1,20 +1,32 @@
 class OrdersController < ApplicationController
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @order = Order.new
+    purchase_cart_id = session[:purchase_cart_id]
+    @cart = Cart.find_by(id: purchase_cart_id)
+    unless @cart
+      redirect_to root_path, alert: 'カートが見つかりません。'
+      return
+    end
+    binding.pry
+    @order_address = OrderAddress.new
+
+  end
+
+  def new
+    @order_address = OrderAddress.new
   end
 
   def create
-    Address.create(address_params)
-    @order = Order.new(order_params)
-    @order.customer = current_customer
+    @cart = Cart.find(order_params[:cart_id])
+    @order_address = OrderAddress.new(order_params)
+    @order_address.customer = current_customer
     @cart.cart_items.each do |cart_item|
       item = cart_item.item
-      order_item = @order.order_items.build(item: item, quantity: cart_item.quantity)
+      order_item = @order_address.order_items.build(item: item, quantity: cart_item.quantity)
     end
-    if @order.valid?
+    if @order_address.valid?
       pay_item
-      @order.save
+      @order_address.save
       return redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -24,7 +36,7 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:price).merge(token: params[:token], customer_id: current_customer.id, store_id: cart.store_id)
+    params.require(:order_address).permit(:postal_code, :pref_id, :city, :house_number, :building_name, :phone_number, :price).merge(token: params[:token], customer_id: current_customer.id, store_id: @cart.store_id)
   end
 
   def address_params

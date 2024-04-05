@@ -32,7 +32,7 @@
           <%= link_to "買い物を続ける (#{cart.store.name})", publicstore_path(cart.store), class: "btn" %>
         </div>
         <div class="col text-end">
-          <%= link_to "購入手続きへ進む", orders_path, class: "btn", data: { confirm: "購入手続きへ進みますか？" } %>
+          <%= button_to "購入手続きへ進む", purchase_cart_path(@cart), method: :post, class: "btn", data: { confirm: "購入手続きへ進みますか？" } %>
         </div>
       </div>
     </div>
