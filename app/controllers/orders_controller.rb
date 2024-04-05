@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    Address.create(address_params)
     @order = Order.new(order_params)
     @order.customer = current_customer
     @cart.cart_items.each do |cart_item|
@@ -24,6 +25,10 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:price).merge(token: params[:token], customer_id: current_customer.id, store_id: cart.store_id)
+  end
+
+  def address_params
+    params.permit(:postal_code, :pref_id, :city, :house_number, :building_name).merge(order_id: @order.id, customer_id: current_customer.id)
   end
 
   def pay_item

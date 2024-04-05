@@ -4,50 +4,50 @@
       <h2>新規登録</h2>
       <%= render "customers/shared/error_messages", resource: resource %>
       <div class="field">
-        <%= f.label :nickname %><br />
+        <%= f.label :nickname, "ニックネーム" %><br />
         <%= f.text_field :nickname %>
       </div>
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email, "メールアドレス"%><br />
         <%= f.email_field :email %>
       </div>
       <div class="field">
-        <%= f.label :password %>
+        <%= f.label :password, "パスワード"%>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
       <div class="field">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation, "確認用パスワード"%><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
       <div class="field">
-        <%= f.label :phone_number %><br />
+        <%= f.label :phone_number, "電話番号"%><br />
         <%= f.telephone_field :phone_number %>
       </div>
       <div class="field">
-        <%= f.label :birth_date %><br />
+        <%= f.label :birth_date ,"生年月日"%><br />
         <%= f.date_field :birth_date %>
       </div>
       <div class="field">
-        <%= f.label :gender_id %><br />
-        <%= f.number_field :gender_id %>
+        <%= f.label :gender_id, "性別" %><br />
+        <%= f.collection_select(:gender_id, Gender.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
       </div>
       <div class="field">
-        <%= f.label :first_name %><br />
+        <%= f.label :first_name, "苗字" %><br />
         <%= f.text_field :first_name %>
       </div>
       <div class="field">
-        <%= f.label :last_name %><br />
+        <%= f.label :last_name, "名前" %><br />
         <%= f.text_field :last_name %>
       </div>
       <div class="field">
-        <%= f.label :first_name_kana %><br />
+        <%= f.label :first_name_kana, "ミョウジ(全角カナ)" %><br />
         <%= f.text_field :first_name_kana %>
       </div>
       <div class="field">
-        <%= f.label :last_name_kana %><br />
+        <%= f.label :last_name_kana, "ナマエ(全角カナ)" %><br />
         <%= f.text_field :last_name_kana %>
       </div>
       <div class="actions">
