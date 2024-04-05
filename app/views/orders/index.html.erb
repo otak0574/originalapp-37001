@@ -34,7 +34,7 @@
         </div>
         <div class="mb-3">
           <%= f.label :price, "金額", class: 'form-label' %>
-          <%= f.text_field :price, class: "form-control price", placeholder: "例) 2000" %>
+            <%= f.text_field :price, value: @cart.total_price, readonly: true, class: "form-control price" %>
         </div>
         <div class="mb-3">
           <label for="number-form" class="form-label">カード番号</label>

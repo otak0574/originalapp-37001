@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
       redirect_to root_path, alert: 'カートが見つかりません。'
       return
     end
-    binding.pry
     @order_address = OrderAddress.new
 
   end
@@ -17,12 +16,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @cart = Cart.find(order_params[:cart_id])
+    purchase_cart_id = session[:purchase_cart_id]
+    @cart = Cart.find_by(id: purchase_cart_id)
     @order_address = OrderAddress.new(order_params)
-    @order_address.customer = current_customer
+    @order_address.customer_id = current_customer
     @cart.cart_items.each do |cart_item|
       item = cart_item.item
-      order_item = @order_address.order_items.build(item: item, quantity: cart_item.quantity)
+      order_item = @cart.cart_items.build(item: item, quantity: cart_item.quantity)
+      binding.pry
     end
     if @order_address.valid?
       pay_item
