@@ -1,0 +1,15 @@
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <% if store_signed_in? %> <!-- ストアがログインしているかどうかを確認 -->
+                <%= link_to publicstore_path(current_store), class: "navbar-brand" do  %> 
+                  <i class="fa-solid fa-carrot"></i>
+                  <%= current_store.name %><!-- ログインしているストアの詳細ページへのリンク -->
+                <% end %>
+              <% else %>
+                <%= link_to root_path, class: "navbar-brand" do  %> 
+                  <i class="fa-solid fa-carrot"></i>
+                  サービス名
+                <% end %>
+              <% end %>
+            </div>
+          </nav>

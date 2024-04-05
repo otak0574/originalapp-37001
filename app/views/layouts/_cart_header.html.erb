@@ -1,0 +1,40 @@
+        <% if customer_signed_in? %>  
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="postal">
+              <a href="#" class="location-link">
+                <i class="fa-solid fa-location-dot"></i> 94105
+              </a>
+            </div>
+            <div class="cart">
+              <% if controller.controller_name == 'publicstores' && controller.action_name == 'show' %>
+                <%# ストア詳細ページにいる場合、そのストアに紐づくカートへのリンクを表示 %>
+                <% cart = current_customer.carts.find_by(store_id: @store.id) %>
+                <% if cart %>
+                  <%= link_to cart_path(cart), class: 'nav-link' do %>
+                    <div class="shopping-cart">
+                      <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= link_to "#", class: 'nav-link disabled' do %>
+                    <div class="shopping-cart">
+                      <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% elsif controller.controller_name == 'publicstores' && controller.action_name == 'index' %>
+                <%# ストア一覧ページにいる場合、カスタマーに紐づくカートの一覧へのリンクを表示 %>
+                <%= link_to carts_path, class: 'nav-link' do %> 
+                  <div class="shopping-cart">
+                    <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
+            <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-success' %>
+          </div>
+        <% end %>

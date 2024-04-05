@@ -7,7 +7,7 @@
       </div>
       <% cart.cart_items.each do |item| %>
         <div class="row align-items-center mb-4">
-          <div class="col-md-6">
+          <div class="col-md-2">
             <h5 class="mb-0"><%= item.item.name %></h5>
           </div>
           <div class="col-md-2">
@@ -23,11 +23,11 @@
       <% end %>
       <hr>
       <div class="row justify-content-end">
-        <div class="col-md-4">
+        <div class="col-md-2">
           <h5>合計金額: <span class=" rounded-pill"><%= number_to_currency(cart.total_price, unit: "¥", precision: 0) %></span></h5>
         </div>
       </div>
-      <div class="row mt-4">
+      <div class="row mt-2">
         <div class="col">
           <%= link_to "買い物を続ける (#{cart.store.name})", publicstore_path(cart.store), class: "btn" %>
         </div>
