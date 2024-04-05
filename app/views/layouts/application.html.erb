@@ -62,15 +62,14 @@
             <input class="form-control me-2 custom-search-input" type="search" placeholder="Search" aria-label="Search" >
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-            <%if customer_signed_in? && current_customer%>
+            <%if customer_signed_in? %>
               <div>
                 <a href="#" class="location-link">
                   <i class="fa-solid fa-location-dot"></i> 94105
                 </a>
-                  <%= link_to cart_path(current_customer.cart), class: 'nav-link'  do %>
+                  <%= link_to carts_path, class: 'nav-link'  do %>
                     <div class="shopping-cart">
                       <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                      <span class="cart-count"><%= current_customer.cart.cart_items.count %></span>
                   </div>
                   <% end %>
               </div>
