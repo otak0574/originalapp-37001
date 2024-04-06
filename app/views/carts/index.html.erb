@@ -1,6 +1,6 @@
 
   <div class="container mt-5">
-    <% @customer_carts.each do |cart| %> 
+    <% @carts.each do |cart| %> 
     <div class="card shadow">
       <div class="card-body">
         <div class="card-header">
@@ -33,7 +33,7 @@
             <%= link_to "買い物を続ける (#{cart.store.name})", publicstore_path(cart.store), class: "btn" %>
           </div>
           <div class="col text-end">
-            <%= button_to "購入手続きへ進む", purchase_cart_path(@cart), method: :post, class: "btn", data: { confirm: "購入手続きへ進みますか？" } %>
+            <%= button_to "購入手続きへ進む", purchase_cart_path(@carts), method: :post, class: "btn", data: { confirm: "購入手続きへ進みますか？" } %>
           </div>
         </div>
       </div>

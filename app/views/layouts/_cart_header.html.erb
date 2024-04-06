@@ -15,29 +15,6 @@
                       <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                     </div>
                   <% end %>
-                <% else %>
-                  <%= link_to "#", class: 'nav-link disabled' do %>
-                    <div class="shopping-cart">
-                      <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                    </div>
-                  <% end %>
-                <% end %>
-                <% elsif controller.controller_name == 'publicstores' && controller.action_name == 'index' %>
-                  <% carts = current_customer.carts %>
-                    <% if carts.present? %>
-                      <% carts.each do |cart| %>
-                        <%= link_to cart_path(cart), class: 'nav-link' do %>
-                          <div class="shopping-cart">
-                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                          </div>
-                        <% end %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to "#", class: 'nav-link disabled' do %>
-                        <div class="shopping-cart">
-                          <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                        </div>
-                    <% end %>
                 <% end %>
               <% elsif controller.controller_name == 'publicstores' && controller.action_name == 'index' %>
                 <%# ストア一覧ページにいる場合、カスタマーに紐づくカートの一覧へのリンクを表示 %>
@@ -56,6 +33,12 @@
                       <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
                     </div>
                   <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to "#", class: 'nav-link disabled' do %>
+                  <div class="shopping-cart">
+                    <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                  </div>
                 <% end %>
               <% end %>
             </div>
