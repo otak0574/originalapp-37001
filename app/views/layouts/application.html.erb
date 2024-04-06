@@ -27,6 +27,11 @@
             </nav>
         </div>
       </header>
+      <% if flash.now[:alert] %>
+        <div class="alert alert-warning">
+          <%= flash.now[:alert] %>
+        </div>
+      <% end %>
     <%= yield %>
   </body>
 </html>
