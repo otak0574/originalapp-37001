@@ -1,21 +1,28 @@
 module CurrentCart
     private
-	def set_cart
+  
+    def set_cart
+      if session[:cart_id]
         begin
-            @cart = Cart.find(session[:cart_id])
-            # カートが購入済みかどうかを確認し、購入済みであれば@cartをnilに設定
-            @cart = nil if @cart.purchased?
+          # sessionに保存されているcart_idを使用してカートを見つける
+          @cart = Cart.find(session[:cart_id])
         rescue ActiveRecord::RecordNotFound
-            @cart = nil
+          @cart = nil
         end
-      
+      end
+  
+      # sessionにカートがない、もしくは見つけたカートが購入済みの場合、新しいカートを探すか作成する
+      if @cart.nil? || @cart.purchased
         item = Item.find(params[:item_id])
-      
-          # カートがnil、またはカートのストアIDがアイテムのストアIDと一致しない場合
-          # 新しいカートを作成するか、既存の未購入カートを検索する
-        if @cart.nil? || @cart.store_id != item.store_id
-            @cart = Cart.find_by(customer_id: current_customer.id, store_id: item.store_id, purchased: false) || Cart.create(customer_id: current_customer.id, store_id: item.store_id)
-            session[:cart_id] = @cart.id
-        end
+        # purchasedがnilかfalseで、かつcustomer_idとstore_idが一致するカートを探す
+        @cart = Cart.find_by(customer_id: current_customer.id, store_id: item.store_id, purchased: [nil, false])
+  
+        # 該当するカートが存在しない場合は新しいカートを作成
+        @cart ||= Cart.create(customer_id: current_customer.id, store_id: item.store_id)
+  
+        # 新しいカートをsessionに保存
+        session[:cart_id] = @cart.id
+      end
     end
-end
+  end
+  

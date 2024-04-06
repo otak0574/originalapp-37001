@@ -9,7 +9,7 @@ class CartsController < ApplicationController
 
   # GET /carts or /carts.json
   def index
-    @customer_carts = current_customer.carts
+      @customer_carts = current_customer.carts.where(purchased: false)
   end
 
   # GET /carts/1 or /carts/1.json
