@@ -1,8 +1,8 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_cart_item, only: [ :show, :edit, :update, :destroy ]
-  before_action :authenticate_customer!
 
   # GET /cart_items or /cart_items.json
   def index
