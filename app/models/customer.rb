@@ -15,4 +15,8 @@ class Customer < ApplicationRecord
   validates :first_name_kana,:last_name_kana, presence: true, format: { with: /\A[\p{katakana} ー－]+\z/, message: 'はカタカナで入力して下さい。' }
   #性別のIDが指定された範囲内にあることを検証
   validates :gender_id, inclusion: { in: 1..5, message: 'は不正な値です。' }
+
+  def not_purchased_carts
+    carts.where(purchased: false)
+  end
 end
