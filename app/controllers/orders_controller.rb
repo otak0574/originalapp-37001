@@ -18,12 +18,12 @@ class OrdersController < ApplicationController
     purchase_cart_id = session[:purchase_cart_id]
     @cart = Cart.find_by(id: purchase_cart_id)
     @order_address = OrderAddress.new(order_params)
-    @order_address.customer_id = current_customer.id
-    binding.pry
     if @order_address.valid?
       pay_item
       if @order_address.save
         session.delete(:purchase_cart_id)
+        flash.now[:alert] = '商品を購入しました。'
+        @cart.update(purchased: true) # 購入済みフラグをtrueに更新
         return redirect_to root_path
       else
         flash.now[:alert] = '購入処理に失敗しました。'
