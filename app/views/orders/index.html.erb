@@ -1,4 +1,9 @@
 <%= include_gon %>
+<% if flash.now[:alert] %>
+  <div class="alert alert-warning">
+    <%= flash.now[:alert] %>
+  </div>
+<% end %>
 <%= form_with model: @order_address, url: orders_path, id: 'charge-form', class: 'needs-validation card-form', novalidate: true, local: true do |f| %>
   <%= render 'error_messages', model: @order_address %>
   <div class="container mt-4">

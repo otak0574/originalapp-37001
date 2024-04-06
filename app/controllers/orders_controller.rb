@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
       return
     end
     @order_address = OrderAddress.new
-
   end
 
   def new
@@ -19,19 +18,21 @@ class OrdersController < ApplicationController
     purchase_cart_id = session[:purchase_cart_id]
     @cart = Cart.find_by(id: purchase_cart_id)
     @order_address = OrderAddress.new(order_params)
-    @order_address.customer_id = current_customer
-    @cart.cart_items.each do |cart_item|
-      item = cart_item.item
-      order_item = @cart.cart_items.build(item: item, quantity: cart_item.quantity)
-      binding.pry
-    end
+    @order_address.customer_id = current_customer.id
+    binding.pry
     if @order_address.valid?
       pay_item
-      @order_address.save
-      return redirect_to root_path
+      if @order_address.save
+        session.delete(:purchase_cart_id)
+        return redirect_to root_path
+      else
+        flash.now[:alert] = '購入処理に失敗しました。'
+        render :index, status: :unprocessable_entity
+      end
     else
+      flash.now[:alert] = '入力に誤りがあります。'
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-      render 'index', status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
