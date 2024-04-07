@@ -17,7 +17,7 @@
 - has_many :chats
 - has_many :deli_statuses
 - has_many :orders
-- has_many :deli_adds
+- has_many :address
 
 ## Storesテーブル
 
@@ -100,9 +100,7 @@
 |-------------|------------|--------------------------------|
 | cart_id     | references | null: false, foreign_key: true |
 | customer_id | references | null: false, foreign_key: true |
-
-
-
+|   price     | integer    | null: false                    |
 ### Associations
 - belongs_to :customer
 - belongs_to :cart
@@ -159,7 +157,7 @@
 - belongs_to :deli_agent
 - belongs_to :deli_add
 
-## Deli_addテーブル
+## addressテーブル
 
 | column       | Type   | Options     |
 |--------------|--------|-------------|
