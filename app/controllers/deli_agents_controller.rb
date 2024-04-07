@@ -1,0 +1,2 @@
+class DeliAgentsController < ApplicationController
+end

@@ -1,16 +1,28 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[ show edit update destroy ]
+  before_action :set_cart, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_customer!
+
+
+  def purchase
+    session[:purchase_cart_id] = params[:id] # カートアイテムのIDからカートのIDをセッションに保存
+    redirect_to orders_path # 注文の新規作成ページにリダイレクト
+  end
 
   # GET /carts or /carts.json
   def index
-    @carts = Cart.all
+     @carts = current_customer.carts.not_purchased
   end
 
   # GET /carts/1 or /carts/1.json
   def show
-    @cart = Cart.find(params[:id])
-    @store_cart = @cart.store_id
+    @carts = current_customer.carts.where(purchased: false)
+    @cart = @carts.find_by(id: params[:id])
+
+    unless @cart
+      redirect_to root_path, alert: 'カートが見つかりません、または既に購入済みです。'
+      return
+    end
+
     @cart_items = @cart.cart_items.includes(item: :store)
     
     @stores = @cart_items.map do |cart_item|
@@ -30,7 +42,6 @@ class CartsController < ApplicationController
   # POST /carts or /carts.json
   def create
     @item = Item.find(params[:item_id])
-    binding.pry
     @cart = Cart.new(cart_params)
     respond_to do |format|
       if @cart.save
@@ -74,6 +85,6 @@ class CartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.fetch(:cart, {}).merge(purchased: false)
     end
 end

@@ -12,3 +12,4 @@ import '@fortawesome/fontawesome-free'
 library.add(fas, far, fab)
 import "preview"
 import "tag"
+import "card"

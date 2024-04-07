@@ -1,0 +1,62 @@
+<%= form_with model: @deli_agent, url: registration_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <h2>新規登録</h2>
+      <%= render "deli_agent/shared/error_messages", resource: resource %>
+      <div class="field">
+        <%= f.label :nickname, "ニックネーム" %><br />
+        <%= f.text_field :nickname %>
+      </div>
+      <div class="field">
+        <%= f.label :email, "メールアドレス"%><br />
+        <%= f.email_field :email %>
+      </div>
+      <div class="field">
+        <%= f.label :password, "パスワード"%>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation, "確認用パスワード"%><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+      <div class="field">
+          <%= f.label :phone_number, "電話番号(ハイフンなしで)", class: 'form-label' %>
+          <%= f.telephone_field :phone_number, class: 'form-control' %>
+        </div>
+      <div class="field">
+        <%= f.label :birth_date ,"生年月日"%><br />
+        <%= f.date_field :birth_date %>
+      </div>
+      <div class="field">
+        <%= f.label :gender_id, "性別" %><br />
+        <%= f.collection_select(:gender_id, Gender.all, :id, :name, {}, {class:"select-box", id:"prefecture"}) %>
+      </div>
+      <div class="field">
+        <%= f.label :first_name, "苗字" %><br />
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="field">
+        <%= f.label :last_name, "名前" %><br />
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="field">
+        <%= f.label :first_name_kana, "苗字(全角カナ)" %><br />
+        <%= f.text_field :first_name_kana %>
+      </div>
+      <div class="field">
+        <%= f.label :last_name_kana, "名前(全角カナ)" %><br />
+        <%= f.text_field :last_name_kana %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
+      <%= render "customers/shared/links" %>
+    </div>
+  </div>
+<% end %>
+
+
+  

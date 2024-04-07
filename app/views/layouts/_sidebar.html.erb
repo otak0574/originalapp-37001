@@ -1,0 +1,24 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+          <div class="offcanvas-header">
+            <h5 id="sidebarLabel">Sidebar</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <!-- サイドバーの内容 -->
+            <ul>
+              <% if customer_signed_in? %>
+                <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete }%></li>
+              <% end %>
+              <% if store_signed_in? %>
+                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-success'%></li>
+                <li><%= link_to "商品の登録", new_item_path, class: 'btn btn-success'%>
+                <%# <li><%= link_to "登録情報の編集", store_path(@store), class: 'btn btn-primary'%>
+                <%# <li><%= link_to "住所の編集", edit_store_address_path(@store_address), class: 'btn btn-primary'%>
+                <%# <li><%= link_to "概要の編集", edit_store_information_path(@store.store_information), class: 'btn btn-primary'%>
+              <% else %>
+                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-success'%>
+                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-success'%>
+              <% end %>
+            </ul>
+          </div>
+        </div>

@@ -17,7 +17,7 @@
 - has_many :chats
 - has_many :deli_statuses
 - has_many :orders
-- has_many :deli_adds
+- has_many :address
 
 ## Storesテーブル
 
@@ -98,12 +98,9 @@
 
 | column      | Type       | Options                        |
 |-------------|------------|--------------------------------|
-| deli_add_id | references | null: false, foreign_key: true |
 | cart_id     | references | null: false, foreign_key: true |
 | customer_id | references | null: false, foreign_key: true |
-| cart_id     | references | null: false, foreign_key: true |
-
-
+|   price     | integer    | null: false                    |
 ### Associations
 - belongs_to :customer
 - belongs_to :cart
@@ -131,7 +128,7 @@
 | email           | string | null: false, unique: true      |
 | pass            | string | null: false                    |
 | phone_number    | string | null: false                    |
-| birth_date       | date   | null: false                    |
+| birth_date      | date   | null: false                    |
 | license         | string |                                |
 | car_number      | string |                                |
 | first_name      | string | null: false                    |
@@ -160,7 +157,7 @@
 - belongs_to :deli_agent
 - belongs_to :deli_add
 
-## Deli_addテーブル
+## addressテーブル
 
 | column       | Type   | Options     |
 |--------------|--------|-------------|

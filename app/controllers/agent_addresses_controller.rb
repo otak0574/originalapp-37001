@@ -1,0 +1,2 @@
+class AgentAddressesController < ApplicationController
+end

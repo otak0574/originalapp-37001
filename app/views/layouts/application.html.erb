@@ -5,81 +5,33 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+     <script type="text/javascript" src="https://js.pay.jp/v2/pay.js"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header class="<%= customer_signed_in? ? 'header-logged-in' : 'header-logged-out' %>">
-      <div class="header-container">
-        <button class="btn custom-sidebar-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-          <i class="fa-solid fa-bars fa-lg"></i>
-        </button>
-        <!-- オフキャンバスメニュー -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-          <div class="offcanvas-header">
-            <h5 id="sidebarLabel">Sidebar</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <!-- サイドバーの内容 -->
-            <ul>
-              <% if customer_signed_in? %>
-                <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete }%></li>
-              <% end %>
-              <% if store_signed_in? %>
-                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-success'%></li>
-                <li><%= link_to "商品の登録", new_item_path, class: 'btn btn-success'%>
-                <%# <li><%= link_to "登録情報の編集", store_path(@store), class: 'btn btn-primary'%>
-                <%# <li><%= link_to "住所の編集", edit_store_address_path(@store_address), class: 'btn btn-primary'%>
-                <%# <li><%= link_to "概要の編集", edit_store_information_path(@store.store_information), class: 'btn btn-primary'%>
-              <% else %>
-                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-success'%>
-                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-success'%>
-              <% end %>
-            </ul>
-          </div>
+      <header class="<%= customer_signed_in? ? 'header-logged-in' : 'header-logged-out' %>">
+        <div class="header-container">
+          <button class="btn custom-sidebar-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <i class="fa-solid fa-bars fa-lg"></i>
+          </button>
+          <%= render "layouts/sidebar"%>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex w-100 p-3 justify-content-between">
+              <%= render "layouts/app_logo"%>
+              <form class="d-flex" role="search">
+                <input class="form-control me-2 custom-search-input" type="search" placeholder="Search" aria-label="Search" >
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <%= render "layouts/cart_header"%>
+            </nav>
         </div>
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex w-100 p-3 justify-content-between">
-          <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid">
-              <% if store_signed_in? %> <!-- ストアがログインしているかどうかを確認 -->
-                <%= link_to publicstore_path(current_store), class: "navbar-brand" do  %> 
-                  <i class="fa-solid fa-carrot"></i>
-                  <%= current_store.name %><!-- ログインしているストアの詳細ページへのリンク -->
-                <% end %>
-              <% else %>
-                <%= link_to root_path, class: "navbar-brand" do  %> 
-                  <i class="fa-solid fa-carrot"></i>
-                  サービス名
-                <% end %>
-              <% end %>
-            </div>
-          </nav>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 custom-search-input" type="search" placeholder="Search" aria-label="Search" >
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-            <%if customer_signed_in? %>
-              <div>
-                <a href="#" class="location-link">
-                  <i class="fa-solid fa-location-dot"></i> 94105
-                </a>
-                <div class="shopping-cart">
-                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-                  <span class="cart-count">2</span>
-                </div>
-              </div>
-            <% else %>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <%= link_to 'ログイン', customer_session_path, class: 'btn' %>
-                <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-success' %>
-              </div>
-            <% end %>
-        </nav>
-      </div>
-    </header>
-  <%= yield %>
+      </header>
+      <% if flash.now[:alert] %>
+        <div class="alert alert-warning">
+          <%= flash.now[:alert] %>
+        </div>
+      <% end %>
+    <%= yield %>
   </body>
 </html>

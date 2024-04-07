@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :deli_agents
   resources :cart_items
   resources :carts
+  resources :carts do
+    member do
+      post 'purchase' # memberメソッドを使って、特定のカートアイテムに対するpurchaseアクションを追加
+    end
+  end
+
+  resources :orders, only:[:index, :create]
+
   root to: 'publicstores#index'
   get '/stores', to: 'publicstores#index'
   devise_for :stores, controllers: {

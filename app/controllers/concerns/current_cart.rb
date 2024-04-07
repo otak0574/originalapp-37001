@@ -1,15 +1,23 @@
 module CurrentCart
-private
-	def set_cart
-        begin
-            @cart = Cart.find(session[:cart_id])
-        rescue ActiveRecord::RecordNotFound
-           @cart = nil
+    extend ActiveSupport::Concern
+  
+    private
+  
+    def set_cart
+        store_id = params[:store_id] || session[:last_visited_store_id]
+        @current_cart = Cart.find_or_initialize_by(customer_id: current_customer.id, store_id: store_id, purchased: false)
+        
+        if @current_cart.new_record?
+            @current_cart.save
+            session[:last_visited_store_id] = store_id
         end
-        item = Item.find(params[:item_id])
-        if @cart == nil || @cart.store_id != item.store_id
-        @cart = Cart.find_by(customer_id: current_customer.id, store_id: item.store_id) || Cart.create(customer_id: current_customer.id, store_id: item.store_id)
-        session[:cart_id] = @cart.id
+        @cart = Cart.find_by(customer_id: current_customer.id, store_id: store_id, purchased: false)
+
+        unless @cart
+          @cart = Cart.create(customer_id: current_customer.id, store_id: store_id, purchased: false)
         end
+      
+        @cart
     end
-end
+  end
+  

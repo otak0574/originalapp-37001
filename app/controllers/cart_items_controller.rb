@@ -1,8 +1,8 @@
 class CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_cart_item, only: [ :show, :edit, :update, :destroy ]
-  before_action :authenticate_customer!
 
   # GET /cart_items or /cart_items.json
   def index
@@ -31,7 +31,7 @@ class CartItemsController < ApplicationController
     @cart_item = @cart.add_item(item)
     respond_to do |format|
       if @cart_item.save
-        format.html { redirect_to publicstore_path(item.store_id), notice: "@item = item.order(:title)" }
+        format.html { redirect_to publicstore_path(item.store_id), notice: "カートに商品を追加しました" }
         format.json { render :show, status: :created, location: @cart_item }
       else
         format.html { render :new, status: :unprocessable_entity }

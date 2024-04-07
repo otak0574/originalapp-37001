@@ -10,6 +10,7 @@ class PublicstoresController < ApplicationController
 
   def show
     @store = Store.find(params[:id])
+    session[:last_visited_store_id] = @store.id
     @items = @store.items
   end
 

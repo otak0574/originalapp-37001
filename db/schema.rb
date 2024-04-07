@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_07_122032) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,36 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "addresses", charset: "utf8", force: :cascade do |t|
+    t.string "postal_code", null: false
+    t.integer "pref_id", null: false
+    t.string "city"
+    t.string "house_number"
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.bigint "order_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_addresses_on_customer_id"
+    t.index ["order_id"], name: "index_addresses_on_order_id"
+  end
+
+  create_table "agent_addresses", charset: "utf8", force: :cascade do |t|
+    t.string "postal_code", null: false
+    t.integer "pref_id", null: false
+    t.string "city"
+    t.string "house_number"
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.bigint "order_id", null: false
+    t.bigint "deli_agent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deli_agent_id"], name: "index_agent_addresses_on_deli_agent_id"
+    t.index ["order_id"], name: "index_agent_addresses_on_order_id"
+  end
+
   create_table "cart_items", charset: "utf8", force: :cascade do |t|
     t.bigint "cart_id"
     t.bigint "item_id"
@@ -54,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
     t.bigint "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "purchased", default: false
     t.index ["customer_id"], name: "index_carts_on_customer_id"
     t.index ["store_id"], name: "index_carts_on_store_id"
   end
@@ -68,7 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", null: false
-    t.string "phone_number", null: false
     t.date "birth_date", null: false
     t.integer "gender_id", null: false
     t.string "first_name", null: false
@@ -82,6 +112,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "deli_agents", charset: "utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "nickname", null: false
+    t.date "birth_date", null: false
+    t.integer "gender_id", null: false
+    t.integer "phone_number", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "first_name_kana", null: false
+    t.string "last_name_kana", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_deli_agents_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_deli_agents_on_reset_password_token", unique: true
   end
 
   create_table "item_tag_relations", charset: "utf8", force: :cascade do |t|
@@ -105,6 +155,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_items_on_store_id"
+  end
+
+  create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.integer "price", null: false
+    t.bigint "customer_id"
+    t.bigint "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["store_id"], name: "index_orders_on_store_id"
   end
 
   create_table "store_addresses", charset: "utf8", force: :cascade do |t|
@@ -159,6 +219,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "customers"
+  add_foreign_key "addresses", "orders"
+  add_foreign_key "agent_addresses", "deli_agents"
+  add_foreign_key "agent_addresses", "orders"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "items"
   add_foreign_key "carts", "customers"
@@ -166,6 +230,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_191701) do
   add_foreign_key "item_tag_relations", "items"
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "stores"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "stores"
   add_foreign_key "store_addresses", "stores"
   add_foreign_key "store_categories", "categories"
   add_foreign_key "store_categories", "stores"
