@@ -128,7 +128,7 @@
 | email           | string | null: false, unique: true      |
 | pass            | string | null: false                    |
 | phone_number    | string | null: false                    |
-| birth_date       | date   | null: false                    |
+| birth_date      | date   | null: false                    |
 | license         | string |                                |
 | car_number      | string |                                |
 | first_name      | string | null: false                    |

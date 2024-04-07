@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :deli_agents
   resources :cart_items
   resources :carts
   resources :carts do
