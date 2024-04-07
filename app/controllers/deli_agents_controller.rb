@@ -1,2 +1,0 @@
-class DeliAgentsController < ApplicationController
-end
