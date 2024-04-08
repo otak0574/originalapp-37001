@@ -32,6 +32,11 @@
           <%= flash.now[:alert] %>
         </div>
       <% end %>
+      <% if notice %>
+        <div class="alert alert-info" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
     <%= yield %>
   </body>
 </html>

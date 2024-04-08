@@ -6,18 +6,21 @@
           <div class="offcanvas-body">
             <!-- サイドバーの内容 -->
             <ul>
-              <% if customer_signed_in? %>
-                <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete }%></li>
-              <% end %>
-              <% if store_signed_in? %>
-                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete },class: 'btn btn-success'%></li>
-                <li><%= link_to "商品の登録", new_item_path, class: 'btn btn-success'%>
-                <%# <li><%= link_to "登録情報の編集", store_path(@store), class: 'btn btn-primary'%>
-                <%# <li><%= link_to "住所の編集", edit_store_address_path(@store_address), class: 'btn btn-primary'%>
-                <%# <li><%= link_to "概要の編集", edit_store_information_path(@store.store_information), class: 'btn btn-primary'%>
+              <% if customer_signed_in? && !store_signed_in? && !deli_agent_signed_in? %>
+                <li><%= link_to "ユーザーログアウト", destroy_customer_session_path, data: { turbo_method: :delete } %></li>
+              <% elsif store_signed_in? && !customer_signed_in? && !deli_agent_signed_in? %>
+                <li><%= link_to "管理者ログアウト", destroy_store_session_path, data: { turbo_method: :delete }, class: 'btn btn-success' %></li>
+                <li><%= link_to "商品の登録", new_item_path, class: 'btn btn-success' %></li>
+              <% elsif deli_agent_signed_in? && !store_signed_in? && !customer_signed_in? %>
+                <li><%= link_to "住所登録", new_agent_address_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "配達員ログアウト", destroy_deli_agent_session_path, data: { turbo_method: :delete }, class: 'btn btn-success' %></li>
               <% else %>
-                <%= link_to "ストア新規登録", new_store_registration_path , class: 'btn btn-success'%>
-                <%= link_to "ストアログイン", new_store_session_path , class: 'btn btn-success'%>
+                <li><%= link_to "ストア新規登録", new_store_registration_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "ストアログイン", new_store_session_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "ユーザー新規登録", new_customer_registration_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "ユーザーログイン", new_customer_session_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "配達員新規登録", new_deli_agent_registration_path, class: 'btn btn-success' %></li>
+                <li><%= link_to "配達員ログイン", new_deli_agent_session_path, class: 'btn btn-success' %></li>
               <% end %>
             </ul>
           </div>

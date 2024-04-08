@@ -1,5 +1,5 @@
 <%= form_with model: @agent_address, url: agent_address_path, id: 'charge-form', class: 'needs-validation card-form', novalidate: true, local: true do |f| %>
-  <%= render 'error_messages', model: @agent_address %>
+  <%= render 'layouts/error_messages', model: @agent_address %>
   <div class="container mt-4">
     <div class="card">
       <div class="card-header">

@@ -1,4 +1,4 @@
-<%= form_with model: @customer, url: session_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
+<%= form_with model: @deli_agent, url: session_path(resource_name), id: 'new_user', class: 'new_user', local: true do |f| %>
   <div class='form-wrap'>
     <div class='form-header'>
       <h1 class='form-header-text'>
@@ -27,7 +27,7 @@
       <div class="field">
         <%= f.label :remember_me %><br />
         <%= f.check_box :remember_me %>
-        <%= render "customers/shared/links" %>
+        <%= render "deli_agents/shared/links" %>
       </div>
     <% end -%>
     <div class='login-btn'>
