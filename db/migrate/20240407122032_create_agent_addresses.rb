@@ -6,6 +6,8 @@ class CreateAgentAddresses < ActiveRecord::Migration[7.0]
       t.string     :city
       t.string     :house_number
       t.string     :building_name
+      t.float      :latitude
+      t.float      :longitude
       t.references :deli_agent, null: false, foreign_key: true
       t.timestamps
     end

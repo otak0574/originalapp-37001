@@ -8,6 +8,7 @@ class Customer < ApplicationRecord
   has_many :orders
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :gender
+  has_one :address
 
 
   validates :nickname, :birth_date, :first_name, :last_name, presence: true

@@ -6,8 +6,8 @@ class CreateStoreAddresses < ActiveRecord::Migration[7.0]
       t.string :address, null: false
       t.string :phone_number, null: false
       t.references :store, foreign_key: true, null: false
-      
-
+      t.float      :latitude
+      t.float      :longitude
       t.timestamps
     end
   end

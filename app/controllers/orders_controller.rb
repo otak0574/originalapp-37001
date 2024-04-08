@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
       redirect_to root_path, alert: 'カートが見つかりません。'
       return
     end
+    @customer_address = current_customer.address if current_customer.address.present?
     @order_address = OrderAddress.new
   end
 

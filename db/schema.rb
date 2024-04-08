@@ -46,12 +46,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
     t.string "house_number"
     t.string "building_name"
     t.string "phone_number", null: false
-    t.bigint "order_id", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "customer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_addresses_on_customer_id"
-    t.index ["order_id"], name: "index_addresses_on_order_id"
   end
 
   create_table "agent_addresses", charset: "utf8", force: :cascade do |t|
@@ -60,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
     t.string "city"
     t.string "house_number"
     t.string "building_name"
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "deli_agent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,7 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
     t.string "nickname", null: false
     t.date "birth_date", null: false
     t.integer "gender_id", null: false
-    t.integer "phone_number", null: false
+    t.string "phone_number", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "first_name_kana", null: false
@@ -181,6 +183,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
     t.string "address", null: false
     t.string "phone_number", null: false
     t.bigint "store_id", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_store_addresses_on_store_id"
@@ -228,7 +232,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "customers"
-  add_foreign_key "addresses", "orders"
   add_foreign_key "agent_addresses", "deli_agents"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "items"

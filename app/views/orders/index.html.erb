@@ -10,27 +10,28 @@
         <h5 class="card-title">住所</h5>
         <div class="mb-3">
           <%= f.label :postal_code, "郵便番号（ハイフンを含む）", class: 'form-label' %>
-          <%= f.text_field :postal_code, class: 'form-control' %>
+          <%= f.text_field :postal_code, value: @customer_address&.postal_code, class: 'form-control' %>
         </div>
         <div class="mb-3">
           <%= f.label :pref_id, "都道府県", class: 'form-label' %>
-          <%= f.collection_select :pref_id, Pref.all, :id, :name, {}, {class: 'form-select'} %>
+          <%= f.collection_select :pref_id, Pref.all, :id, :name, {selected: @customer_address&.pref_id}, {class: 'form-select'} %>
+
         </div>
         <div class="mb-3">
           <%= f.label :city, "市町村（任意）", class: 'form-label' %>
-          <%= f.text_field :city, class: 'form-control' %>
+          <%= f.text_field :city, value: @customer_address&.city, class: 'form-control' %>
         </div>
         <div class="mb-3">
           <%= f.label :house_number, "番地（任意）", class: 'form-label' %>
-          <%= f.text_field :house_number, class: 'form-control' %>
+          <%= f.text_field :house_number, value: @customer_address&.house_number, class: 'form-control' %>
         </div>
         <div class="mb-3">
           <%= f.label :building_name, "建物名（任意）", class: 'form-label' %>
-          <%= f.text_field :building_name, class: 'form-control' %>
+          <%= f.text_field :building_name, value: @customer_address&.building_name, class: 'form-control' %>
         </div>
         <div class="mb-3">
           <%= f.label :phone_number, "電話番号(ハイフンなしで)", class: 'form-label' %>
-          <%= f.telephone_field :phone_number, class: 'form-control' %>
+          <%= f.telephone_field :phone_number, value: @customer_address&.phone_number, class: 'form-control' %>
         </div>
         <div class="mb-3">
           <%= f.label :price, "金額", class: 'form-label' %>

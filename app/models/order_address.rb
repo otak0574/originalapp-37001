@@ -13,13 +13,13 @@ class OrderAddress
   validates :pref_id, numericality: {other_than: 0, message: "can't be blank"}
 
   def save
-    # 寄付情報を保存し、変数donationに代入する
     order = Order.create(price: price, customer_id: customer_id, store_id: store_id)
-    # 住所を保存する
-    # donation_idには、変数donationのidと指定する
-    Address.create(
-      postal_code: postal_code, pref_id: pref_id, city: city, house_number: house_number,
-       building_name: building_name,phone_number: phone_number, order_id: order.id,customer_id: customer_id 
-       )
+
+      if address_id.present?
+        address = Address.find(address_id)
+        address.update(postal_code: postal_code, pref_id: pref_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number)
+      else
+        Address.create(postal_code: postal_code, pref_id: pref_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number)
+      end
   end
 end
