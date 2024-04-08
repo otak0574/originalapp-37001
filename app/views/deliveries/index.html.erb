@@ -1,0 +1,21 @@
+<配達員用注文一覧ページ>
+<!-- app/views/your_view.html.erb -->
+<div id="map" style="height: 400px; width: 100%;"></div>
+
+<script>
+  function initMap() {
+    var location = { lat: -34.397, lng: 150.644 }; // 任意の緯度経度
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: location
+    });
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
+</script>

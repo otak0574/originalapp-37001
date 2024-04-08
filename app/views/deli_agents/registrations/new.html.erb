@@ -2,7 +2,7 @@
   <div class='form-wrap'>
     <div class='form-header'>
       <h2>新規登録</h2>
-      <%= render "deli_agent/shared/error_messages", resource: resource %>
+      <%= render "deli_agents/shared/error_messages", resource: resource %>
       <div class="field">
         <%= f.label :nickname, "ニックネーム" %><br />
         <%= f.text_field :nickname %>
@@ -53,10 +53,7 @@
       <div class="actions">
         <%= f.submit "Sign up" %>
       </div>
-      <%= render "customers/shared/links" %>
+      <%= render "deli_agents/shared/links" %>
     </div>
   </div>
 <% end %>
-
-
-  

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :deli_agents
+  resources :agent_addresses, except: [:index]
+  resources :deliveries, only: [:index]
   resources :cart_items
-  resources :carts
   resources :carts do
     member do
       post 'purchase' # memberメソッドを使って、特定のカートアイテムに対するpurchaseアクションを追加
@@ -36,6 +36,12 @@ Rails.application.routes.draw do
     confirmations: "customers/confirmations"
 }
 
+  devise_for :deli_agents, controllers: {
+    registrations: "deli_agents/registrations",
+    sessions: "deli_agents/sessions",
+    passwords: "deli_agents/passwords",
+    confirmations: "deli_agents/confirmations"
+  }
   resources :publicstores, only: [:show, :edit, :update]
   resources :items do
     collection do

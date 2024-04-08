@@ -1,0 +1,34 @@
+<%= form_with model: @agent_address, url: agent_addresses_path, id: 'charge-form', class: 'needs-validation card-form', novalidate: true, local: true do |f| %>
+  <%= render 'layouts/error_messages', model: @agent_address %>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        住所情報入力
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">住所</h5>
+        <div class="mb-3">
+          <%= f.label :postal_code, "郵便番号（ハイフンを含む）", class: 'form-label' %>
+          <%= f.text_field :postal_code, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :pref_id, "都道府県", class: 'form-label' %>
+          <%= f.collection_select :pref_id, Pref.all, :id, :name, {}, {class: 'form-select'} %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :city, "市町村（任意）", class: 'form-label' %>
+          <%= f.text_field :city, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :house_number, "番地（任意）", class: 'form-label' %>
+          <%= f.text_field :house_number, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :building_name, "建物名（任意）", class: 'form-label' %>
+          <%= f.text_field :building_name, class: 'form-control' %>
+        </div>
+         <%= f.submit "登録する", class: "btn btn-primary", id: "button" %>
+      </div>
+    </div>
+  </div>
+<% end %>

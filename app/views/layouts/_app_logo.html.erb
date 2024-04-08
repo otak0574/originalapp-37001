@@ -5,6 +5,11 @@
                   <i class="fa-solid fa-carrot"></i>
                   <%= current_store.name %><!-- ログインしているストアの詳細ページへのリンク -->
                 <% end %>
+              <% elsif deli_agent_signed_in? %>
+                <%= link_to deliveries_path, class: "navbar-brand" do %>
+                  <i class="fa-solid fa-carrot"></i>
+                  <%= "#{current_deli_agent.nickname}さん" %>
+                <% end %>
               <% else %>
                 <%= link_to root_path, class: "navbar-brand" do  %> 
                   <i class="fa-solid fa-carrot"></i>

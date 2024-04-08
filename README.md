@@ -4,7 +4,7 @@
 |-----------------|--------|--------------------------------|
 | nickname        | string | null: false                    |
 | email           | string | null: false, unique: true      |
-| encrypted_password| string | null: false                    |
+| encrypted_password| string | null: false                  |
 | phone_number    | integer| null: false                    |
 | birth_date      | date   | null: false                    |
 | gender_id       | integer| null: false                    |
@@ -129,7 +129,6 @@
 | pass            | string | null: false                    |
 | phone_number    | string | null: false                    |
 | birth_date      | date   | null: false                    |
-| license         | string |                                |
 | car_number      | string |                                |
 | first_name      | string | null: false                    |
 | last_name       | string | null: false                    |
@@ -144,10 +143,9 @@
 
 | column        | Type       | Options                        |
 |---------------|------------|--------------------------------|
-| deli_time     | string     | null: false                    |
 | deli_agent_id | references | null: false, foreign_key: true |
 | customer_id   | references | null: false, foreign_key: true |
-| deli_add_id   | references | null: false, foreign_key: true |
+| address_id   | references | null: false, foreign_key: true |
 | order_id      | references | null: false, foreign_key: true |
 
 
@@ -173,16 +171,3 @@
 - has_many :orders
 - has_many :deli_statuses
 - belongs_to :customer
-
-## Chatsテーブル
-
-| column       | Type       | Options                        |
-|--------------|------------|--------------------------------|
-| content      | text       | null: false                    |
-| customer_id  | references | null: false, foreign_key: true |
-| deli_agent_id| references | null: false, foreign_key: true |
-| image        | string     |                                |
-
-### Associations
-- belongs_to :customer
-- belongs_to :deli_agent
