@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_07_122032) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_122032) do
     t.string "city"
     t.string "house_number"
     t.string "building_name"
-    t.string "phone_number", null: false
+    t.integer "phone_number", null: false
     t.bigint "order_id", null: false
     t.bigint "deli_agent_id", null: false
     t.datetime "created_at", null: false
@@ -132,6 +132,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_122032) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_deli_agents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_deli_agents_on_reset_password_token", unique: true
+  end
+
+  create_table "deliveries", charset: "utf8", force: :cascade do |t|
+    t.bigint "address_id", null: false
+    t.bigint "order_id", null: false
+    t.bigint "deli_agent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_deliveries_on_address_id"
+    t.index ["deli_agent_id"], name: "index_deliveries_on_deli_agent_id"
+    t.index ["order_id"], name: "index_deliveries_on_order_id"
   end
 
   create_table "item_tag_relations", charset: "utf8", force: :cascade do |t|
@@ -227,6 +238,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_122032) do
   add_foreign_key "cart_items", "items"
   add_foreign_key "carts", "customers"
   add_foreign_key "carts", "stores"
+  add_foreign_key "deliveries", "addresses"
+  add_foreign_key "deliveries", "deli_agents"
+  add_foreign_key "deliveries", "orders"
   add_foreign_key "item_tag_relations", "items"
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "stores"
