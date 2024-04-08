@@ -18,7 +18,7 @@ class AgentAddressesController < ApplicationController
   end
 
   def edit
-
+    @agent_address = AgentAddress.find(params[:id])
   end
 
   def update
