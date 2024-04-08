@@ -7,7 +7,7 @@ class AgentAddressesController < ApplicationController
   def create
     @agent_address = AgentAddress.new(agent_address_params)
     if @agent_address.save
-      redirect_to @agent_address, notice: 'Agent address was successfully created.'
+      redirect_to deliveries_path, notice: 'Agent address was successfully created.'
     else
       render action: 'new'
     end
