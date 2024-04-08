@@ -60,13 +60,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
     t.string "city"
     t.string "house_number"
     t.string "building_name"
-    t.integer "phone_number", null: false
-    t.bigint "order_id", null: false
     t.bigint "deli_agent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deli_agent_id"], name: "index_agent_addresses_on_deli_agent_id"
-    t.index ["order_id"], name: "index_agent_addresses_on_order_id"
   end
 
   create_table "cart_items", charset: "utf8", force: :cascade do |t|
@@ -233,7 +230,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_222346) do
   add_foreign_key "addresses", "customers"
   add_foreign_key "addresses", "orders"
   add_foreign_key "agent_addresses", "deli_agents"
-  add_foreign_key "agent_addresses", "orders"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "items"
   add_foreign_key "carts", "customers"

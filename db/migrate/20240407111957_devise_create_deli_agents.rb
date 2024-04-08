@@ -9,7 +9,7 @@ class DeviseCreateDeliAgents < ActiveRecord::Migration[7.0]
       t.string :nickname,        null: false
       t.date   :birth_date,      null: false
       t.integer :gender_id,      null: false
-      t.integer :phone_number,   null: false
+      t.string :phone_number,   null: false
       t.string :first_name,      null: false
       t.string :last_name,       null: false
       t.string :first_name_kana, null: false
