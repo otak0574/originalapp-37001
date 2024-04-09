@@ -15,3 +15,4 @@ pin "@fortawesome/free-solid-svg-icons", to: "@fortawesome--free-solid-svg-icons
 pin "preview", to: "preview.js"
 pin "tag", to: "tag.js"
 pin "card", to: "card.js"
+pin "map" , to: "map.js"

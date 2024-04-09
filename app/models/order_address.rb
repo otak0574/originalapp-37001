@@ -14,7 +14,9 @@ class OrderAddress
 
   def save
     order = Order.create(price: price, customer_id: customer_id, store_id: store_id)
-
+    customer = Customer.find(customer_id)
+    address = customer.address
+    address_id = address.id
       if address_id.present?
         address = Address.find(address_id)
         address.update(postal_code: postal_code, pref_id: pref_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number)

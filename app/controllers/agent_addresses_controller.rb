@@ -7,6 +7,7 @@ class AgentAddressesController < ApplicationController
   def create
     @agent_address = AgentAddress.new(agent_address_params)
     if @agent_address.save
+      binding.pry
       redirect_to deliveries_path, notice: 'Agent address was successfully created.'
     else
       render action: 'new'
@@ -22,7 +23,12 @@ class AgentAddressesController < ApplicationController
   end
 
   def update
-
+    @agent_address = AgentAddress.find(params[:id])
+    if @agent_address.update(agent_address_params)
+      redirect_to deliveries_path, notice: 'Agent address was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
