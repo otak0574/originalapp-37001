@@ -8,8 +8,8 @@
 <%# <div id="agent-data" data-latitude="<%=@full_agent_address.latitude" data-longitude=" @full_agent_address.longitude"></div> %>
 
 <div class="orders">
-  <% @order.each, class: 'confirmation' do |order|%>
-    <%= link_to '#' do %>
+  <% @order.each do |order|%>
+    <%= link_to delivery_path(order), class: "confirmation" do %>
       <%= order.store.name%>
     <% end %>
   <% end %>
