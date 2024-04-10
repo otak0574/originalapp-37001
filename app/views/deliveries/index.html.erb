@@ -5,3 +5,12 @@
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap">
 </script>
+<%# <div id="agent-data" data-latitude="<%=@full_agent_address.latitude" data-longitude=" @full_agent_address.longitude"></div> %>
+
+<div class="orders">
+  <% @order.each, class: 'confirmation' do |order|%>
+    <%= link_to '#' do %>
+      <%= order.store.name%>
+    <% end %>
+  <% end %>
+</div>
