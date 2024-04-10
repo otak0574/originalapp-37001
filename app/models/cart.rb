@@ -3,6 +3,7 @@ class Cart < ApplicationRecord
   has_many :items, through: :cart_items
   belongs_to :customer
 	belongs_to :store
+	has_one :order
 
 	scope :not_purchased, -> { where(purchased: false) }
 

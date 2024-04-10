@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :postal_code, :pref_id, :city, :house_number, :building_name, :phone_number, :price, :customer_id, :store_id, :token
+  attr_accessor :postal_code, :pref_id, :city, :house_number, :building_name, :phone_number, :price, :customer_id, :store_id, :cart_id, :token
 
   with_options presence: true do
     validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000000, message: 'is invalid'}
@@ -13,7 +13,8 @@ class OrderAddress
   validates :pref_id, numericality: {other_than: 0, message: "can't be blank"}
 
   def save
-    order = Order.create(price: price, customer_id: customer_id, store_id: store_id)
+    binding.pry
+    order = Order.create(price: price, customer_id: customer_id, store_id: store_id, cart_id: cart_id)
     customer = Customer.find(customer_id)
     address = customer.address
     address_id = address.id
