@@ -6,7 +6,8 @@ class DeliveriesController < ApplicationController
   end
 
   def show 
-    order = Order.find(params[:id])
-    @cart = order.cart
+    binding.pry
+    @order = Order.find(params[:id])
+    @cart = @order.cart
   end
 end

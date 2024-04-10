@@ -5,6 +5,7 @@ class Store < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name,presence: true
+  has_one_attached :image
   has_one :store_address
   has_one :store_information
   has_many :store_categories

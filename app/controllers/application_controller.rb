@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if resource_class == Customer
       devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :birth_date, :gender_id, :first_name, :last_name, :first_name_kana, :last_name_kana])
     elsif resource_class == Store
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name,{ category_ids: [] }])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name,{ category_ids: [] }, :image])
     elsif resource_class == DeliAgent
       devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :phone_number, :birth_date, :gender_id, :first_name, :last_name, :first_name_kana, :last_name_kana])
     end

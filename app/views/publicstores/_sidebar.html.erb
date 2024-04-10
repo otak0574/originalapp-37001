@@ -2,7 +2,9 @@
     <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
       <div class="text-center my-3">
         <%= link_to publicstore_path(@store.id), class: "none-text-decoration" do %>
-          <%= image_tag 'shop-solid.svg',class: 'store-image', alt: 'store' %>
+          <div class="d-flex justify-content-center align-items-center mt-2">
+              <%= image_tag @store.image, class: "img-fluid", alt: "Item image" %>
+            </div>
             <span class="fs-4"><%= @store.name%></span>
         <% end %>
       </div>

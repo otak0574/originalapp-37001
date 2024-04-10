@@ -6,7 +6,6 @@ class AddressesController < ApplicationController
   end
 
   def create
-    binding.pry
     @address = Address.new(address_params)
     if @address.save
       redirect_to root_path, notice: 'address was successfully created.'

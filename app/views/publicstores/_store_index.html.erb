@@ -7,7 +7,9 @@
         <!-- borderless-cardクラスを追加してボーダーと影を削除 -->
         <div class="card borderless-card text-center" style="max-width: 9rem;"> <!-- 幅を半分に設定 -->
           <%= link_to publicstore_path(store.id), class: "none-text-decoration" do %>
-            <%= image_tag 'shop-solid.svg', class: 'img-fluid rounded-start store-logo', alt: 'store'%>
+           <div class="d-flex justify-content-center align-items-center mt-2">
+              <%= image_tag @store.image, class: "img-fluid", alt: "Item image" %>
+            </div>
           <% end %>
           <div class="card-body text-center">
             <p class="card-title"><%= store.name %></p>
