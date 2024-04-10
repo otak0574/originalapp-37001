@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :agent_addresses, except: [:index]
   resources :addresses, except: [:index, :destroy, :show]
-  resources :deliveries, only: [:index]
+  resources :deliveries, only: [:index, :show]
   resources :cart_items
   resources :carts do
     member do

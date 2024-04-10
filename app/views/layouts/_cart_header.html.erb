@@ -8,7 +8,7 @@
             <div class="cart">
               <% if controller.controller_name == 'publicstores' && controller.action_name == 'show' %>
                 <%# ストア詳細ページにいる場合、そのストアに紐づくカートへのリンクを表示 %>
-                <% cart = current_customer.carts.find_by(store_id: @store.id) %>
+                <% cart = current_customer.carts.find_by(store_id: @store.id, purchased: false) %>
                 <% if cart %>
                   <%= link_to cart_path(cart), class: 'nav-link' do %>
                     <div class="shopping-cart">
@@ -26,7 +26,7 @@
               <% elsif controller.controller_name == 'items' && controller.action_name == 'show' %>
                 <%# アイテム詳細ページにいる場合 %>
                 <% store = @item.store %>
-                <% cart = current_customer.carts.find_by(store_id: store.id) %>
+                <% cart = current_customer.carts.find_by(store_id: store.id, purchased: false) %>
                 <% if cart %>
                   <%= link_to cart_path(cart), class: 'nav-link' do %>
                     <div class="shopping-cart">

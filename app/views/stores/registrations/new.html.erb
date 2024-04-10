@@ -10,6 +10,14 @@
         <%= f.text_field :name %>
       </div>
 
+      <div class="input-group mb-4">
+            <span class="input-group-text">
+              <%= f.label :image, "画像" %>
+            </span>
+            <%= f.file_field :image%>
+            <div id="previews"></div>
+          </div>
+
       <div class="field">
         <%= f.label :email, "店舗メールアドレス" %><br />
         <%= f.email_field :email %>

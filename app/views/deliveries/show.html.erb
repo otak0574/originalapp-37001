@@ -1,0 +1,37 @@
+  <div class="container mt-5">
+    <div class="card shadow">
+      <div class="card-header">
+        <h4 class="card-title"><%= @cart.store.name %></h4>
+      </div>
+      <div class="card-body">
+        <% @cart.cart_items.each do |item| %>
+          <div class="row align-items-center mb-4">
+            <div class="col-md-6">
+              <h5 class="mb-0"><%= item.item.name %></h5>
+            </div>
+            <div class="col-md-2">
+              <span class="rounded-pill"><%= number_to_currency(item.item.price, unit: "¥", precision: 0) %></span>
+            </div>
+            <div class="col-md-2">
+              <span class="rounded-pill"><%= item.quantity %>個</span>
+            </div>
+            <div class="col-md-2">
+              <span class="rounded-pill">小計: <%= number_to_currency(item.total_price, unit: "¥", precision: 0) %></span>
+            </div>
+          </div>
+        <% end %>
+        <hr>
+        <div class="row justify-content-end">
+          <div class="col-md-4">
+            <h5>合計金額: <span class="rounded-pill"><%= number_to_currency(@cart.total_price, unit: "¥", precision: 0) %> </span></h5>
+          </div>
+        </div>
+        <div class="row mt-4">
+
+          <div class="col text-end">
+            <%= button_to "配達情報を取得する", "#", method: :post, class: "btn" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
