@@ -1,45 +1,52 @@
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
 let map, infoWindow;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
-    zoom: 10,
+    zoom: 18,
   });
+  
   infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.createElement("button");
+  let agentData = document.getElementById('agent-data');
+  let agentLat = parseFloat(agentData.getAttribute('data-latitude'));
+  let agentLng = parseFloat(agentData.getAttribute('data-longitude'));
+  let agentPos = { lat: agentLat, lng: agentLng };
 
-  locationButton.textContent = "位置情報を取得する";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-  locationButton.addEventListener("click", () => {
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent("位置情報");
-          infoWindow.open(map);
-          map.setCenter(pos);
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
+  let agentMarker = new google.maps.Marker({
+    position: agentPos,
+    map: map,
+    title: "Agent Location"
   });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        infoWindow.setPosition(userPos);
+        infoWindow.setContent("現在地");
+        infoWindow.open(map);
+        map.setCenter(userPos);
+
+        // ユーザーの位置情報にもマーカーを設置
+        let userMarker = new google.maps.marker.AdvancedMarkerElement({
+          position: userPos,
+          map: map,
+          title: "Your Location"
+        });
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // ブラウザが Geolocation をサポートしていない場合
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
